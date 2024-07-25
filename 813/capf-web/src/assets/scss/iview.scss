@@ -1,0 +1,459 @@
+/**
+  * @description  升级为iview4.0以上之后存在的问题 修改样式
+  * @author yxm
+  * @date 2021-10-19
+  */
+@import '~@/assets/scss/_variables.scss';
+#app{
+  // 下拉框
+  .ivu-select-dropdown{
+    font-size: $base-font-size !important;
+  }
+  .ivu-select-input{
+    font-size: $base-font-size !important;
+  }
+  .ivu-select-placeholder{
+    font-size: $base-font-size !important;
+    height: $element--base-height !important;
+    padding-top: 2px !important;
+    padding-bottom: 2px !important;
+  }
+  .ivu-select-selected-value{
+    font-size: $base-font-size !important;
+  }
+  .ivu-select-item{
+    font-size: $base-font-size !important;
+  }
+  .ivu-dropdown-item{
+    font-size: $base-font-size !important;
+  }
+  // 输入框
+  .ivu-input{
+    font-size: $base-font-size !important;
+  }
+  // 表格
+  .ivu-table{
+    font-size: $base-font-size ;
+    td {
+      // height: 38px !important;
+    }
+    th {
+      // height: 38px !important;
+    }
+  }
+  .ivu-table-cell span, .ivu-table-header,tr{
+    // font-size: $base-font-size !important;
+  }
+  .ivu-table-cell div span{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    // font-size: $base-font-size !important;
+  }
+
+  // 表单
+  .ivu-form-item label{
+    font-size: $base-font-size !important;
+  }
+  .ivu-form-item-required .ivu-form-item-label:before{
+    font-size: $base-font-size !important;
+  }
+  // 多行输入框
+  textarea.ivu-input {
+    font-size: $base-font-size !important;
+  }
+  // 表单错误提示
+  .ivu-form-item-error-tip{
+    font-size: $base-font-size;
+  }
+  // 级联
+  .ivu-cascader{
+    width: 100%;
+    display: inline-block;
+  }
+  .ivu-cascader-menu-item{
+    font-size: $base-font-size !important;
+  }
+  .ivu-cascader-not-found-tip{
+    padding: 10px 30px;
+  }
+  // 抽屉
+  .ivu-drawer-wrap{
+    z-index: 999;
+  }
+  .ivu-drawer-mask{
+    z-index: 998;
+  }
+  // 对话框
+  .ivu-modal,.ivu-modal-body{
+    font-size: $base-font-size !important;
+  }
+  // 对话框 标题
+  .ivu-modal-header-inner{
+    font-size:  $base-font-size !important;
+    font-weight: bold !important;
+  }
+  // 底部页码
+  .ivu-page,.ivu-page-options-elevator{
+    font-size: $base-font-size !important;
+  }
+  // 树状结构
+  .ivu-tree-title{
+    font-size: $base-font-size !important;
+  }
+
+  // 小细节
+  .ivu-tag{
+    font-size: $base-font-size!important;
+    height: 25px !important;
+    line-height: 25px !important;
+    margin: 0 !important;
+    padding: 0 7px !important;
+  }
+  .ivu-tag-primary{
+    background-color: $index--color-blue !important;
+  }
+  .ivu-tag-error{
+    background-color: $index--color-red !important;;
+  }
+  .ivu-tag-success{
+    background-color: $index--color-green !important;
+  }
+  .ivu-tag-warning{
+    background-color: $index--color-yellow !important;
+  }
+  // 将tag标签的小手改变
+  .ivu-tag-checked{
+    // cursor:default;
+  }
+  .ivu-spin-fix{
+    opacity: 0.7;
+  }
+  .ivu-spin{
+    color: $index--color;
+    font-size: 18px;
+    line-height: 40px;
+  }
+  // 多选框
+  .ivu-checkbox-checked .ivu-checkbox-inner, .ivu-checkbox-indeterminate .ivu-checkbox-inner{
+    background: $index--color !important;
+    border-color: $index--color !important;
+  }
+  // ivu-checkbox-inner
+
+  // 根据主题色修改
+  .ivu-btn-primary{
+    background: $index--color-green !important;
+    border-color: $index--color-green !important;
+    &:hover{
+      // background: $index--color !important;
+    }
+  }
+  // .ivu-btn-error{
+  //   background: $index--color-red !important;
+  //   &:hover{
+  //     background: $index--color-red !important;
+  //   }
+  // }
+  // .ivu-btn-warning{
+  //   background: $index--color-yellow !important;
+  //   &:hover{
+  //     background: $index--color-yellow !important;
+  //   }
+  // }
+  // .ivu-btn-info{
+  //   background: $index--color-orange !important;
+  //   &:hover{
+  //     background: $index--color-orange !important;
+  //   }
+  // }
+  .ivu-btn-default{
+    border: 1px solid  #CAD1DE !important;
+    color: #191919 !important;
+    &:hover{
+      color: $index--color !important;
+      border-color: $index--color !important;
+    }
+  }
+  // .ivu-btn-success{
+  //   background: $index--color-blue !important;
+  //   &:hover{
+  //     background: $index--color-blue !important;
+  //   }
+  // }
+  // 边框按钮
+  .ivu-btn-ghost.ivu-btn-error{
+    color: $index--color-red !important;
+    border-color: $index--color-red !important;
+    &:hover{
+      border-color: $index--color-red !important;
+    }
+  }
+  .ivu-btn-ghost.ivu-btn-primary{
+    background: rgba(41, 163, 135, 0.06) !important;
+    color: $index--color !important;
+    border-color: $index--color !important;
+    // background-color: rgba(0,0,0,0) !important;
+    &:hover{
+      border-color: $index--color !important;
+    }
+  }
+  // drawer
+  .ivu-drawer-header-inner{
+    font-size: $base-font-size !important;
+    font-weight: bold;
+  }
+  .ivu-drawer-header{
+    p{
+      font-size: $base-font-size !important;
+      font-weight: bold;
+    }
+  }
+  .ivu-drawer-content{
+    .ivu-icon-ios-close{
+      font-size: 16px !important;
+    }
+    .ivu-btn{
+      font-size: $base-font-size !important;
+    }
+  }
+  .ivu-drawer-body{
+    font-size: $base-font-size !important;
+}
+}
+// ivu-icon ivu-icon-ios-close
+// 当同一iview的风格时
+.ivu-page-item-active {
+  border-color: $index--color !important;
+}
+.ivu-page-item-active a,
+.ivu-page-item-active:hover a {
+  color: $index--color !important;
+  border-color: $index--color !important;
+  outline: 0;
+}
+.ivu-page-item:hover {
+  color: $index--color !important;
+  border-color:$index--color !important;
+  outline: 0;
+}
+.ivu-page-item:hover a {
+  color: $index--color !important;
+  border-color: $index--color !important;
+  outline: 0;
+}
+.ivu-select,
+.ivu-select-single,
+.ivu-select-default {
+  // color: $index--color !important;
+  border-color: $index--color !important;
+  outline: 0;
+}
+.ivu-page-next {
+  color: $index--color !important;
+  border-color: $index--color !important;
+  outline: 0;
+}
+.ivu-page-next:hover {
+  color: $index--color !important;
+  border-color: $index--color !important;
+  outline: 0;
+}
+.ivu-page-next:hover a {
+  color: $index--color !important;
+  border-color: $index--color !important;
+  outline: 0;
+}
+.ivu-page-prev {
+  color: $index--color !important;
+  border-color: $index--color !important;
+  outline: 0;
+}
+.ivu-form-item-error .ivu-input{
+  // border: 1px solid $index--color;
+}
+.ivu-input:hover:hover{
+  border-color: $index--color !important;
+}
+.ivu-input:focus {
+  border-color: $index--color !important;
+  outline: 0;
+  -webkit-box-shadow: 0 0 0 2px rgba(151, 248, 217, 0.2) !important;
+  box-shadow: 0 0 0 2px rgba(151, 248, 217, 0.2) !important;
+}
+.ivu-input-number:hover:hover{
+  border-color: $index--color !important;
+}
+.ivu-input-number:focus {
+  border-color: $index--color !important;
+  outline: 0;
+  -webkit-box-shadow: 0 0 0 2px rgba(151, 248, 217, 0.2) !important;
+  box-shadow: 0 0 0 2px rgba(151, 248, 217, 0.2) !important;
+}
+ivu-input-number-default{
+  background-color: $index--color !important;
+}
+.ivu-form-item-error .ivu-input:focus{
+  // border-color:$index--color;
+  // -webkit-box-shadow: 0 0 0 2px rgba(151, 248, 217, 0.2);
+  // box-shadow: 0 0 0 2px rgba(151, 248, 217, 0.2)
+}
+.ivu-page-prev:hover {
+  color: $index--color !important;
+  border-color: $index--color !important;
+  outline: 0 !important;
+}
+.ivu-select-item-selected,
+.ivu-select-item-selected:hover {
+  color: $index--color !important;
+  border-color: $index--color !important;
+  outline: 0 !important;
+}
+.ivu-page-prev:hover a {
+  color: $index--color !important;
+  border-color: $index--color !important;
+  outline: 0 !important;
+}
+.ivu-page-options-elevator input:focus {
+  color: $index--color !important;
+  border-color: $index--color !important;
+  outline: 0 !important;
+  box-shadow: 0 0 0 0 !important;
+}
+.ivu-select-visible .ivu-select-selection {
+  border-color: $index--color !important;
+  outline: 0 !important;
+  box-shadow: 0 0 0 0 !important;
+}
+.ivu-page-options-elevator input:hover {
+  border-color: $index--color !important;
+  outline: 0 !important;
+}
+.ivu-switch-checked {
+  border-color: $index--color !important;
+  background-color: $index--color !important;
+}
+.ivu-spin{
+  color: $index--color !important;
+}
+.ivu-select-selection:hover {
+  border-color: $index--color !important;
+  outline: 0 !important;
+  box-shadow: 0 0 0 0 !important;
+}
+.ivu-select-selection-focused {
+  border-color: $index--color !important;
+  outline: 0 !important;
+  box-shadow: 0 0 0 0 !important;
+}
+.ivu-page-options-elevator input:focus {
+  border-color: $index--color !important;
+  outline: 0 !important;
+}
+.ivu-page-prev,
+.ivu-page-disabled {
+  border-color: $index--color !important;
+  outline: 0 !important;
+}
+.ivu-table-row-hover td {
+  background-color: $index--color-hover !important;
+}
+.ivu-table-row-highlight td, .ivu-table-stripe .ivu-table-body tr.ivu-table-row-highlight:nth-child(2n) td, .ivu-table-stripe .ivu-table-fixed-body tr.ivu-table-row-highlight:nth-child(2n) td, tr.ivu-table-row-highlight.ivu-table-row-hover td{
+  background-color: $index--color-hover !important;
+}
+// .ivu-table-row-hover .ivu-table-cell-tree{
+//   border-color: $index--color !important;
+// }
+// .ivu-table-row-highlight .ivu-table-cell-tree{
+//   border-color: $index--color-hover !important;
+// }
+textarea.ivu-input{
+  font-size: $base-font-size !important;
+}
+.selected-tr td{
+  color: $index--color !important;
+}
+.ivu-date-picker-cells-cell-selected em,.ivu-date-picker-cells-cell-selected:hover em{
+  background: $index--color !important;
+}
+.ivu-date-picker-cells-cell em:hover{
+  background: $index--color-hover !important;
+}
+.ivu-date-picker-cells-cell-selected em,.ivu-date-picker-cells-focused em{
+  box-shadow: 0 0 0 1px $index--color inset !important;
+}
+.ivu-date-picker-cells-cell-today em:after{
+  background: $index--color !important;
+}
+.ivu-upload-drag:hover{
+  border: 1px dashed $index--color
+}
+.ivu-radio-checked .ivu-radio-inner{
+  border-color: $index--color !important;
+}
+.ivu-radio-checked .ivu-radio-inner:after{
+  background-color: $index--color !important;
+}
+.ivu-upload-list-file:hover{
+  // background: $index--color !important;
+  a, span{
+    color: $index--color !important;
+  }
+}
+.ivu-cascader-menu-item-active{
+  color: $index--color !important;
+}
+// .ivu-cascader-menu{
+//   width:180px !important;
+// }
+// /deep/.ivu-cascader-menu{
+//   width:180px !important;
+// }
+// .ivu-form .ivu-cascader .ivu-select-dropdown{
+//   top: 65px !important;
+// }
+// .ivu-form /deep/.ivu-cascader .ivu-select-dropdown{
+// top: 65px !important;
+// }
+// .ivu-form .ivu-select .ivu-select-dropdown{
+// top: 65px !important;
+// }
+// .ivu-form /deep/.ivu-select .ivu-select-dropdown{
+// top: 65px !important;
+// }
+// .ivu-form  .ivu-date-picker .ivu-select-dropdown{
+//   top: 65px !important;
+// }
+// iview同一风格结束
+
+  // 对话框 标题
+.ivu-modal-header-inner{
+  font-size: $base-font-size !important;
+  font-weight: bold !important ;
+}
+.ivu-modal-footer .ivu-btn-primary{
+  background: $index--color !important;
+  &:hover{
+    background: $index--color !important;
+  }
+}
+.ivu-modal-footer button{
+  font-size: $base-font-size !important;
+}
+.ivu-modal,.ivu-modal-body{
+  // font-size:  $base-font-size !important
+}
+.el-tabs__item.is-active{
+  color: $index--color !important;
+}
+.el-tabs__item:hover {
+  color: $index--color!important;
+}
+.el-tabs__active-bar {
+  background-color: $index--color !important;
+}
+.el-tabs__item {
+  .is-active {
+    color: $index--color !important;
+  }
+}

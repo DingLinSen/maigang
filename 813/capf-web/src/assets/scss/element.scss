@@ -1,0 +1,72 @@
+/**
+  * @description  element ui 样式复写
+  * @author yxm
+  * @date 2021-10-19
+  */
+@import '~@/assets/scss/_variables.scss';
+.el-cascader{
+  width: 100%;
+}
+/* 输入框 */
+.el-input .el-input__inner{
+  height: $element--base-height !important;
+  padding-left: 7px;
+}
+
+// 级联
+.el-cascader-menu__empty-text{
+  font-size: $base-font-size !important;
+}
+.el-cascader--medium{
+  line-height: 30px !important;
+}
+/* x轴去滚动条 */
+.el-cascader-menu{
+  overflow: hidden !important;
+}
+.el-scrollbar__thumb{
+  display: none !important;
+  overflow: hidden !important;
+}
+.el-scrollbar__wrap{
+  overflow-x: hidden !important;
+  margin-right: -1px !important;
+}
+/* y轴滚动条颜色 */
+.el-scrollbar__bar.is-vertical > div {
+  background-color: $index--color  !important;
+  width: 6px;
+}
+.el-cascader .el-input.is-focus .el-input__inner{
+  border-color: $index--color  !important;
+}
+.el-cascader-node.is-active, .el-cascader-node.is-selectable.in-checked-path{
+  color: $index--color  !important;
+}
+.el-radio__input.is-checked .el-radio__inner{
+  background-color: $index--color  !important;
+  border-color: $index--color  !important;
+}
+.el-radio__inner:hover{
+  border-color: $index--color  !important;
+}
+.el-cascader-node__label, .el-icon-arrow-right{
+  font-size: $base-font-size !important;
+}
+.el-cascader-node.in-active-path{
+  color: $index--color  !important;
+}
+.el-checkbox__input.is-checked .el-checkbox__inner, .el-checkbox__input.is-indeterminate .el-checkbox__inner{
+  background-color: $index--color  !important;
+  border-color: $index--color  !important;
+}
+.el-checkbox__inner:hover{
+  border-color: $index--color  !important;
+}
+/* 状态字体大小 */
+.el-input__inner{
+  font-size: $base-font-size !important;
+}
+.el-card__body {
+  overflow-y: hidden;
+}

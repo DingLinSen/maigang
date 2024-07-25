@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" href="/favicon.ico" />
+  <meta name="viewport1" content="width=device-width, initial-scale=1.0" />
+  <!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> -->
+  <title id="pageTitle"></title>
+</head>
+
+<body>
+  <div id="app">
+    <style>
+      .app-loading {
+        display: flex;
+        width: 100%;
+        height: 100%;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        background: #f0f2f5;
+      }
+
+      .app-loading .app-loading-wrap {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        display: flex;
+        -webkit-transform: translate3d(-50%, -50%, 0);
+        transform: translate3d(-50%, -50%, 0);
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+      }
+
+      .app-loading .app-loading-title {
+        margin-bottom: 30px;
+        font-size: 20px;
+        font-weight: bold;
+        text-align: center;
+      }
+
+      .app-loading .app-loading-logo {
+        width: 100px;
+        margin: 0 auto 15px auto;
+      }
+
+      .app-loading .app-loading-item {
+        position: relative;
+        display: inline-block;
+        width: 60px;
+        height: 60px;
+        vertical-align: middle;
+        border-radius: 50%;
+      }
+
+      .app-loading .app-loading-outter {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        border: 4px solid #2d8cf0;
+        border-bottom: 0;
+        border-left-color: transparent;
+        border-radius: 50%;
+        animation: loader-outter 1s cubic-bezier(0.42, 0.61, 0.58, 0.41) infinite;
+      }
+
+      .app-loading .app-loading-inner {
+        position: absolute;
+        top: calc(50% - 20px);
+        left: calc(50% - 20px);
+        width: 40px;
+        height: 40px;
+        border: 4px solid #87bdff;
+        border-right: 0;
+        border-top-color: transparent;
+        border-radius: 50%;
+        animation: loader-inner 1s cubic-bezier(0.42, 0.61, 0.58, 0.41) infinite;
+      }
+
+      @-webkit-keyframes loader-outter {
+        0% {
+          -webkit-transform: rotate(0deg);
+          transform: rotate(0deg);
+        }
+
+        100% {
+          -webkit-transform: rotate(360deg);
+          transform: rotate(360deg);
+        }
+      }
+
+      @keyframes loader-outter {
+        0% {
+          -webkit-transform: rotate(0deg);
+          transform: rotate(0deg);
+        }
+
+        100% {
+          -webkit-transform: rotate(360deg);
+          transform: rotate(360deg);
+        }
+      }
+
+      @-webkit-keyframes loader-inner {
+        0% {
+          -webkit-transform: rotate(0deg);
+          transform: rotate(0deg);
+        }
+
+        100% {
+          -webkit-transform: rotate(-360deg);
+          transform: rotate(-360deg);
+        }
+      }
+
+      @keyframes loader-inner {
+        0% {
+          -webkit-transform: rotate(0deg);
+          transform: rotate(0deg);
+        }
+
+        100% {
+          -webkit-transform: rotate(-360deg);
+          transform: rotate(-360deg);
+        }
+      }
+    </style>
+    <div class="app-loading">
+      <div class="app-loading-wrap">
+        <div class="app-loading-title">
+          <img src="/logo.png" class="app-loading-logo" alt="Logo" />
+          <div class="app-loading-title">
+            <%= title %>
+          </div>
+        </div>
+        <div class="app-loading-item">
+          <div class="app-loading-outter"></div>
+          <div class="app-loading-inner"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- <script>
+    $(document).ready(function () { // 当DOM加载完成后执行以下操作
+      var titles = ["第一个标题", "第二个标题", "第三个标题"]; // 定义多个标题
+      var currentIndex = -1; // 初始化当前索引值为-1（表示还未开始）
+
+      function scrollToNextTitle() { // 创建函数scrollToNextTitle用于切换到下一个标题
+        if (currentIndex >= titles.length) return; // 若已经显示最后一个标题则不再切换
+
+        $("#pageTitle").text(titles[++currentIndex]); // 将下一个标题赋值给id为"pageTitle"的元素
+        setTimeout(scrollToNextTitle, 2000); // 每隔2秒调用自身，实现无限循环切换标题
+        console.log(1111)
+      }
+
+      scrollToNextTitle(); // 调用函数开始滚动标题
+    });
+  </script> -->
+  <script type="module" src="/src/main.ts"></script>
+  <!-- <script src="/lib-flex/flexible.js"></script> -->
+</body>
+
+</html>

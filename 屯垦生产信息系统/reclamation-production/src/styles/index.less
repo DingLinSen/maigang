@@ -1,0 +1,411 @@
+@import './var.css';
+@import 'element-plus/theme-chalk/dark/css-vars.css';
+
+// 新增、查询的按钮样式
+.el-button--primary {
+  border-color: var(--el-color-primary);
+  background: #F4FAF5;
+
+  &:hover {
+    border-color: #278537 !important;
+    background-color: #278537 !important;
+    color: #fff !important;
+  }
+
+  &:focus {
+    border-color: #278537 !important;
+    background-color: #278537 !important;
+  }
+
+  &:focus-visible {
+    outline: none !important;
+  }
+}
+
+// 导入、导出的按钮样式
+.el-button--primary.is-plain {
+  border-color: var(--el-color-primary);
+  background: #F4FAF5;
+
+  &:hover {
+    border-color: var(--el-color-primary) !important;
+    background: #D9EBDC !important;
+    color: var(--el-color-primary) !important;
+  }
+
+  &:focus {
+    border-color: var(--el-color-primary) !important;
+    background: #D9EBDC !important;
+    color: var(--el-color-primary) !important;
+  }
+}
+
+// 重置、删除的按钮样式
+.btn-default:hover {
+  background-color: #F4FAF5 !important;
+  border-color: #3C9A4C !important;
+}
+
+// 删除的按钮样式
+.el-button--danger {
+  background-color: #F8F4F4 !important;
+  color: #F65052 !important;
+
+  &:hover {
+    background-color: #F7E8E8 !important;
+    border-color: #F65052 !important;
+  }
+}
+
+// 表格中的按钮样式
+.el-button--text {
+  color: #2E8D3F !important;
+  // margin-left: 0 !important;
+  // position: relative;
+
+  // &::after {
+  //   content: '';
+  //   width: 1px;
+  //   height: 12px;
+  //   background-color: rgba(10, 2, 4, 0.2);
+  //   position: absolute;
+  //   right: 0;
+  //   top: 50%;
+  //   transform: translateY(-50%);
+  // }
+
+  &:hover {
+    color: #10561C !important;
+  }
+
+  &:focus-visible {
+    outline: none !important;
+  }
+}
+
+// 表格中删除的按钮样式
+.el-button--danger--text {
+  color: #F65052 !important;
+
+  &:hover {
+    color: #ED1B1E !important;
+  }
+}
+
+.el-main {
+  width: 100%;
+}
+
+.el-card {
+  .el-card__body {
+    padding: var(--card-body-padding);
+  }
+}
+
+.file-prview-img {
+  .el-dialog .el-dialog__body {
+    .dialog-content {
+      margin-bottom: 0;
+    }
+  }
+}
+
+// 解决抽屉弹出时，body宽度变化的问题
+.el-popup-parent--hidden {
+  width: 100% !important;
+}
+
+.el-form-item {
+  margin-bottom: 28px;
+}
+
+.searchWrapper.el-form {
+  .el-form-item {
+    margin-right: 10px;
+    margin-bottom: 12px !important;
+  }
+}
+
+.security-info-modal {
+  .el-dialog {
+    .el-dialog__body {
+      padding: 0 0 0 20px;
+    }
+  }
+}
+
+.quit-btn {
+  background: var(--el-color-primary);
+
+  &:focus-visible {
+    outline: none !important;
+  }
+}
+
+.el-scrollbar__thumb {
+  background-color: #3C9A4C;
+  opacity: 1;
+
+  &:hover {
+    background-color: #3C9A4C;
+    opacity: .8;
+  }
+}
+
+.el-col-241 {
+  width: 10%;
+}
+
+.el-col-48 {
+  width: 20%;
+}
+
+.el-col-96 {
+  width: 40%;
+}
+
+// .h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
+// 	font-family: inherit;
+// 	font-weight: 500;
+// 	line-height: 1.1;
+// 	color: inherit;
+// }
+/** 表单布局 **/
+.form-header {
+  font-size: 15px;
+  color: #3C9A4C;
+  border-bottom: 1px solid #ddd;
+  margin: 8px 10px 25px 10px;
+  padding-bottom: 5px
+}
+
+.search-btn-right {
+  text-align: right;
+}
+
+.file-list-modal {
+  .el-scrollbar {
+    .el-scrollbar__bar.is-horizontal {
+      display: none;
+    }
+  }
+
+  .file-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 0;
+
+    .preview {
+      .el-icon {
+        cursor: pointer;
+      }
+    }
+  }
+
+  .el-dialog .el-dialog__body {}
+
+}
+
+.file-preview-modal {
+  .el-dialog .el-dialog__body {
+    .vue-office-excel {
+      width: 100%;
+
+      .vue-office-excel-main {
+        height: 100%;
+      }
+
+      .x-spreadsheet,
+      .x-spreadsheet-sheet {
+        width: 100% !important;
+        // height: 100% !important;
+      }
+    }
+  }
+}
+
+.align-items-center {
+  align-items: center;
+}
+
+.justify-content-around {
+  justify-content: space-around;
+}
+
+.justify-content-center {
+  justify-content: center;
+}
+
+.justify-content-between {
+  justify-content: space-between;
+}
+
+.anchorBL {
+  display: none;
+}
+
+.flex-bteween {
+  display: flex;
+  justify-content: space-between;
+}
+
+.import-tip {
+  width: 60vw;
+
+  &.el-message-box {
+    max-width: 60%;
+  }
+
+  .el-notification__content {
+    height: 80vh;
+    overflow: hidden;
+
+    p {
+      height: 100%;
+      overflow-y: scroll;
+    }
+  }
+}
+
+.el-table {
+  .el-button+.el-button {
+    margin-left: 0;
+  }
+
+  .el-button {
+    padding: 6px 8px;
+  }
+}
+
+.el-input.is-disabled,
+.el-textarea.is-disabled {
+
+  .el-input__inner,
+  .el-textarea__inner {
+    color: #000 !important;
+    -webkit-text-fill-color: #000 !important;
+  }
+}
+
+.el-range-editor.is-disabled input {
+  color: #000 !important;
+  -webkit-text-fill-color: #000 !important;
+}
+
+.el-popper {
+  font-size: 14px;
+  max-width: 50% !important;
+  // text-align: justify;
+  // text-justify: newspaper;
+  // word-break: break-all;
+  // line-height: 20px;
+}
+
+.el-select__popper.el-popper {
+  max-width: 100% !important;
+}
+
+.el-select__popper.el-popper {
+  .el-select-dropdown {
+    max-width: 50vw;
+  }
+}
+
+.page-p-lr {
+  padding: 10px 20px;
+}
+
+.el-select__tags .el-tag--info {
+  // max-width: 110px;
+}
+
+.el-select-tags-wrapper {
+  // white-space: nowrap;
+  // overflow: hidden;
+  // display: none !important;
+}
+
+.details-footer {
+  text-align: right;
+}
+
+.editor-content-html {
+  width: 100%;
+  border: 1px solid #dcdfe6;
+  padding: 10px;
+  background-color: #f5f7fa;
+  border-radius: 4px;
+  min-height: 30vh;
+  word-wrap: break-word;
+
+  a {
+    color: var(--el-color-primary);
+    text-decoration: underline;
+  }
+
+  table,
+  th,
+  td {
+    border: 1px solid var(--w-e-textarea-border-color);
+    border-collapse: collapse;
+  }
+
+  table {
+    margin: 20px 0;
+  }
+
+  th {
+    background-color: var(--w-e-textarea-slight-bg-color);
+    font-weight: 700;
+    min-width: 30px;
+  }
+
+  th,
+  td {
+    min-height: 28px;
+    height: 28px;
+    padding: 3px 5px;
+    box-sizing: border-box;
+  }
+}
+
+.editor-wrapper {
+  width: 100%;
+
+  h1 {
+    font-size: 22px;
+    font-weight: bold;
+  }
+
+  h2 {
+    font-size: 20px;
+    font-weight: bold;
+  }
+
+  h3 {
+    font-size: 18px;
+    font-weight: bold;
+  }
+
+  h4 {
+    font-size: 16px;
+    font-weight: bold;
+  }
+
+  h5 {
+    font-size: 14px;
+  }
+
+  i {
+    font-style: italic;
+  }
+
+  .w-e-toolbar .w-e-menu i {
+    font-style: normal;
+  }
+
+  ol {
+    list-style-type: decimal;
+  }
+}

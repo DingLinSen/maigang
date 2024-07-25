@@ -1,0 +1,65 @@
+@import "~@/assets/scss/_variables.scss";
+.login-user-wrapper {
+  color: $navbar--color-login-user-wrapper;
+  opacity: 1;
+  overflow: hidden;
+  border-bottom: 1px solid $navbar--border-color-login-user-wrapper;
+  border-bottom-style:dashed;
+  .info-wrap {
+    padding: 20px 20px 12px;
+    background-color: $navbar--background-color-white;
+    border-top: 2px solid $navbar--border-color-info-wrap;
+    text-align: center;
+    .login-header-img {
+      width: 70px;
+      height: 70px;
+    }
+    .login-user-name {
+      color: $navbar--color-login-user-wrapper;
+      margin: 0;
+      font-size: 16px;
+      font-weight: 700
+    }
+    .dropdown-caret,
+    .sys-desc {
+      font-size: 14px;
+      color: $navbar--color-login-user-wrapper;
+      opacity: 0.75;
+    }
+  }
+}
+.ivu-divider-dashed{
+  // background: pink;
+  display: none
+}
+#quick-menu-nav {
+  height: 0;
+  opacity: 0.5;
+  -webkit-transition: height 0.4s ease, opacity 0.4s ease-in-out;
+  -moz-transition: height 0.4s ease, opacity 0.4s ease-in-out;
+  -o-transition: height 0.4s ease, opacity 0.4s ease-in-out;
+  transition: height 0.4s ease, opacity 0.4s ease-in-out;
+}
+#quick-menu-nav.show-menu {
+  height: 100px;
+  opacity: 1;
+}
+
+.quick-menu {
+  background-color: $navbar--background-color-quick-menu;
+  margin: 0;
+  .quick-menu-item {
+    color: $navbar--color-login-user-wrapper;
+    padding: 12px 0px;
+    width: 39%;
+    text-align: center;
+    display: inline-block;
+  }
+  .quick-menu-item:nth-of-type(odd) {
+    margin-left: 10%;
+  }
+  .quick-menu-item:hover {
+    color: $navbar--color-quick-menu-item-hover;
+    background-color: transparent
+  }
+}

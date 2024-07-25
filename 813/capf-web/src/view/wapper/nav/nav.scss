@@ -1,0 +1,350 @@
+@import "~@/assets/scss/_variables.scss";
+// 头部组件
+#navbar {
+  position: fixed;
+  width: 100%;
+  z-index: 100;
+  left: 0;
+  top: 0;
+
+  .navbar-brand,.mainnav-in .brand-title,.mainnav-lg .brand-title {
+  }
+  .navbar-header {
+    display: none;
+    .navbar-brand {
+      padding: 0;
+      height: 60px;
+      position: relative;
+      overflow: hidden;
+      display: block;
+      line-height: 60px;
+      background-color: $navbar--background-color-navbar-brand;
+      align-items: center;
+      display: flex;
+      padding: 0 10px;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.1); /*no*/
+      &>img {
+        display: block;
+      }
+      .brand-icon {
+        width: 34px;
+        height: 34px;
+      }
+      .brand-title {
+        display: none;
+        color: white;
+        height: auto;
+        .brand-text {
+          display: block;
+          font-size: 21px;
+          font-weight: bold;
+          margin-left: 16px;
+          font-family: Microsoft YaHei;
+          font-weight: bold;
+        }
+        .brand-text:first-child {
+        }
+      }
+    }
+    .navbar-brand-collapsed {
+      width: 58px;
+      .brand-title {
+        display: none;
+      }
+    }
+  }
+  .info-box{
+    display: none;
+  }
+
+  .navbar-content {
+    background-color: $navbar--background-color-navbar-container ;
+    height: 60px;
+    text-align: right;
+    box-shadow: 0px 0px 9px 1px rgba(0, 0, 0, 0.1);
+  }
+  .top-info{
+    display: none;
+    width: 60%;
+    height: 100%;
+    text-align: left;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    .userName{
+      display: inline-block;
+      color: $navbar--background-color-gray;
+      font-size: $base-font-size;
+      font-family: Microsoft YaHei;
+      padding-left: 15px;
+      // border-left: 1px solid $navbar--background-color-navbar-brand; /*no*/
+    }
+  }
+  .navbar-top-links{
+    line-height: 59.47px;
+    width: 100%;
+    .sub-box{
+      color: $navbar--background-color-gray;
+      // background-color: $navbar--background-color-navbar-brand;
+      display: inline-block;
+      padding: 0 15px;
+    }
+    .info-box{
+      display: inline-block;
+      padding-right: 10px;
+      .ivu-dropdown-rel{
+        a{
+          color: $navbar--background-color-gray !important;
+          font-size: $base-font-size;
+          font-family: Microsoft YaHei;
+        }
+      }
+      img{
+        width: 28px;
+        margin-right: 5px;
+      }
+    }
+    .icon-box{
+      color: $navbar--background-color-gray;
+      display: inline-block;
+      font-size: $base-font-size;
+      cursor: pointer;
+      i{
+        font-size: $base-font-size;
+        padding: 2px 10px;
+        padding-left: 20px;
+        border-left: 1px solid #cccccc; /*no*/
+        color: #A9A9A9;
+        &:last-child{
+          padding-right: 0px;
+        }
+      }
+    }
+    .navbar-top-links{
+      width: 40%;
+    }
+  }
+}
+
+// 头部组件 768px
+@media (min-width: 768px) {
+  #navbar {
+    background-color: transparent;
+    #navbar-container {
+      background-color: $navbar--background-color-navbar-container ;
+      height: 60px;
+
+      .navbar-content {
+        position: relative;
+        background-color: transparent;
+        display: flex;
+      }
+      .content-collapsed {
+        margin-left: 58px;
+      }
+      .navbar-header {
+        background-color: transparent;
+        display: block;
+        left: 0;
+        position: relative;
+        float: left;
+        height: 100%;
+      }
+
+      .navbar-header:before {
+        content: '';
+        position: absolute;
+        display: block;
+        width: 100%;
+        height: 60px;
+        background-color: $navbar--background-color-navbar-container ;
+      }
+
+      #navbar .brand-title {
+        word-wrap: break-word;
+      }
+    }
+  }
+
+}
+
+@media (min-width: 768px) {
+  #container.mainnav-sm .brand-icon {
+    width: 30px !important;
+    height: 30px !important;
+    position: relative;
+    top: 13px;
+    left: 15px;
+  }
+}
+.ivu-cascader .ivu-select-dropdown{
+  top: 65px !important;
+}
+
+// 头部链接组件
+.navbar-top-links {
+  display: inline-block;
+  height: 60px;
+  &>li {
+    float: right;
+    list-style: none;
+  }
+
+  &>li>a {
+    display: table-cell;
+    padding: 0px 10px;
+    vertical-align: middle;
+    color: $navbar--background-color-white;
+    transition: all 0.4s;
+
+    .login-header-img {
+      width: 40px;
+      height: 40px;
+      display: inline-block;
+      top: 12px;
+      right: 8px;
+      position: absolute;
+    }
+
+    .user-name {
+      padding: 12px 60px 6px 0px;
+      display: block;
+      font-size: 16px;
+    }
+
+    &:focus {
+      background-color: transparent
+    }
+
+    &:hover {
+      background-color: $navbar--background-color-navbar-container !important;
+      color: #d9d9d9;
+      transition: all 0.4s
+    }
+
+    &>i {
+      font-size: 20px;
+      line-height: 1em;
+      vertical-align: middle
+    }
+  }
+}
+
+// 用户头像点击效果
+.user-info-dropdown {
+  position: relative;
+
+  .slider-user-info {
+    position: absolute;
+    top: 60px;
+    right: 0px;
+    width: 180px;
+    height: 0;
+    opacity: 0;
+    display: none;
+    transition: all 0.5s ease;
+    -webkit-transition: all 0.5s ease;
+    text-align: left;
+    z-index: 100;
+    background: $navbar--background-color-white;
+    text-align: center;
+    border: 1px solid $navbar--border-color-slider-user-info; /*no*/
+
+    .dropdown-header-img {
+      height: 60px;
+      width: 60px;
+      margin: 20px 0 0px 0;
+    }
+
+    p {
+      background: $navbar--background-color-white;
+      height: 0px;
+      color: $navbar--color-black;
+      line-height: 40px;
+      padding: 0 10px;
+      right: 0;
+      transition: all 0.5s ease;
+      -webkit-transition: all 0.5s ease;
+
+      span {
+        display: inline-block;
+      }
+    }
+  }
+
+  &:hover .slider-user-info {
+    height: 220px;
+    opacity: 1;
+    display: block;
+    background: $navbar--background-color-white;
+
+    p {
+      position: relative;
+      height: 40px;
+      border-bottom: 1px solid #DDDDDF; /*no*/
+    }
+  }
+}
+@media (min-width: 840px) {
+  #navbar {
+    background-color: transparent;
+    #navbar-container {
+      .top-info{
+        display: block;
+        display: flex;
+        align-items: center;
+      }
+      .navbar-header{
+        .navbar-brand{
+          text-align: center;
+          .brand-title{
+            display: block;
+          }
+        }
+      }
+    }
+    .navbar-header{
+      .navbar-brand-collapsed {
+        width: 58px;
+        .brand-title {
+          display: none !important;
+        }
+      }
+    }
+  }
+}
+.brand-title {
+  line-height: 36px
+}
+.ivu-dropdown-item{
+  min-width: 10px !important;
+}
+.ivu-select-dropdown{
+  top: 20px;
+  margin: 0;
+  padding: 0;
+}
+.ivu-cascader .ivu-select-dropdown{
+  top: 65px !important;
+}
+/deep/.ivu-drawer-content{
+  top: 60px
+}
+/deep/.ivu-select-dropdown{
+  top: 43px !important;
+  z-index: 100;
+}
+/deep/.ivu-cascader .ivu-select-dropdown{
+  top: 65px !important;
+}
+/deep/.ivu-drawer-header-inner::before{
+  color: $index--color !important;
+}
+.brand-title {
+  line-height: 36px
+}
+.sider-trigger-a{
+  background-color: $navbar--background-color-navbar-container;
+  color: $navbar--background-color-gray !important;
+  font-size: $base-font-size16;
+  font-family: Microsoft YaHei;
+}

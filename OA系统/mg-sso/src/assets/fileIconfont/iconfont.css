@@ -1,0 +1,39 @@
+@font-face {
+  font-family: "iconfont"; /* Project id 4226700 */
+  src: url('iconfont.woff2?t=1693188464504') format('woff2'),
+       url('iconfont.woff?t=1693188464504') format('woff'),
+       url('iconfont.ttf?t=1693188464504') format('truetype');
+}
+
+.iconfont {
+  font-family: "iconfont" !important;
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-ppt:before {
+  content: "\e805";
+}
+
+.icon-excel:before {
+  content: "\e806";
+}
+
+.icon-word:before {
+  content: "\e807";
+}
+
+.icon-pdf:before {
+  content: "\e808";
+}
+
+.icon-wenjianjia:before {
+  content: "\e80c";
+}
+
+.icon-weizhi3:before {
+  content: "\e84e";
+}
+

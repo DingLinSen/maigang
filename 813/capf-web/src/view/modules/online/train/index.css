@@ -1,0 +1,310 @@
+.control-container {
+  background-color: #E7EBEE;
+}
+.control-container .control-content {
+  overflow: hidden;
+  overflow-y: auto;
+  display: flex;
+  flex-wrap: wrap;
+}
+.el-icon-loading {
+  font-size: 40px;
+  color: #29A387;
+}
+.center {
+  text-align: center;
+}
+.title {
+  font-size: 0.28rem;
+  font-weight: 400;
+  color: #333333;
+  margin-top: 0.1rem;
+}
+.waiting-certification {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: Microsoft YaHei;
+  overflow-y: auto;
+}
+.waiting-certification .waiting-content {
+  background-color: #fff;
+  border-radius: 2px;
+  padding: 0.5rem 0.3rem 0.3rem 0.3rem;
+  margin-top: 0.4rem;
+}
+.waiting-certification .waiting-content .bottom {
+  border-top: 1px solid #EEEEEE;
+  margin-top: 0.3rem;
+  padding: 0.2rem 0.4rem 0 0.4rem;
+  line-height: 30px;
+  color: #333333;
+}
+.waiting-certification img {
+  height: 1rem;
+  margin-bottom: 10px;
+}
+.waiting-certification .icon-span {
+  background: rgba(38, 163, 134, 0.15);
+  color: #399A84;
+  margin-right: 5px;
+  padding: 1px 3px;
+  border-radius: 2px;
+  font-size: 14px;
+  margin-left: 3px;
+}
+.waiting-certification .sub {
+  margin-right: 3;
+}
+.waiting-certification .name {
+  font-size: 22px;
+  font-weight: bold;
+  color: #333333;
+}
+.waiting-certification .dept {
+  color: #666666;
+  margin-top: 5px;
+}
+.certification {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: Microsoft YaHei;
+  overflow-y: auto;
+  padding-top: 2vh;
+}
+.certification .btu {
+  background-color: #29A387;
+  border-radius: 2px;
+  font-size: 15px;
+  font-family: Microsoft YaHei;
+  text-align: center;
+  color: #fff;
+  line-height: 36px;
+  cursor: pointer;
+  width: 50%;
+  display: inline-block;
+  margin-top: 0.3rem;
+}
+.certification .certification-content {
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  margin-top: 0.4rem;
+}
+.certification .certification-content .step {
+  margin-bottom: 0.1rem;
+  font-size: 0.22rem;
+  font-weight: 400;
+  color: #333333;
+}
+.certification .certification-content .img-box {
+  background: #ECECEC;
+  padding: 0.15rem 0;
+  position: relative;
+}
+.certification .certification-content .img-box .prompt {
+  position: absolute;
+  display: inline-block;
+  background: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  padding: 6px 10px;
+  font-size: 14px;
+  width: 50%;
+  text-align: center;
+  left: 25%;
+  top: 40%;
+}
+.certification .certification-content .img-box .prompt img {
+  height: 15px;
+  margin: 0;
+  margin-right: 4px;
+  margin-top: -2px;
+}
+.certification .certification-content .img-box img {
+  height: 2.5rem;
+  margin: 0.4rem 1.5rem;
+}
+.certification .certification-content .left .left-info {
+  background-color: #fff;
+  padding: 0.2rem;
+}
+.certification .certification-content .right {
+  margin-left: 6%;
+}
+.certification .certification-content .right .right-info {
+  background-color: #fff;
+  padding: 0.2rem;
+}
+.certification .certification-content .right .right-info .img-box {
+  background-color: rgba(41, 163, 135, 0.3);
+}
+.certification .certification-content .right .camera_outer {
+  width: 5.5rem;
+  height: 3.8rem;
+  text-align: center;
+  background: #ECECEC;
+  position: relative;
+}
+.certification .certification-content .right .camera_outer .prompt {
+  position: absolute;
+  display: inline-block;
+  background: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  padding: 6px 10px;
+  font-size: 14px;
+  width: 50%;
+  text-align: center;
+  left: 25%;
+  top: 40%;
+}
+.certification .certification-content .right .camera_outer .prompt img {
+  height: 15px;
+  margin: 0;
+  margin-right: 4px;
+  margin-top: -2px;
+}
+.certification .certification-content .right .camera_outer video {
+  height: 3rem;
+  width: 5rem;
+  margin-top: 0.2rem;
+}
+.certification .certification-content .right .camera_outer .cameraImg {
+  height: 3rem;
+  width: 4.5rem;
+  margin-top: 0.3rem;
+}
+.waiting-test {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: Microsoft YaHei;
+  overflow-y: auto;
+}
+.waiting-test .waiting-content {
+  background-color: #fff;
+  border-radius: 2px;
+  padding: 0.4rem 0.4rem 0.4rem 0.4rem;
+  margin-top: 0.4rem;
+  color: #333333;
+}
+.waiting-test .waiting-content p {
+  line-height: 30px;
+}
+.test-wrap {
+  background-color: #fff;
+}
+.test-wrap .test-top {
+  text-align: center;
+  padding: 10px 10px;
+}
+.test-wrap .test-top .title {
+  font-size: 22px;
+}
+.test-wrap .test-top .time {
+  font-size: 16px;
+  margin-left: 10px;
+  text-align: right;
+  font-weight: bold;
+}
+.test-wrap .summary {
+  display: flex;
+  padding: 0 3%;
+  font-size: 15px;
+}
+.test-wrap .summary div {
+  text-align: center;
+  border-right: 1px solid #dcdee2;
+}
+.test-wrap .summary div:first-child {
+  border-left: 1px solid #dcdee2;
+}
+.test-wrap .summary div p {
+  border-bottom: 1px solid #dcdee2;
+  line-height: 30px;
+}
+.test-wrap .summary div p:first-child {
+  line-height: 34px;
+  background-color: #f8f8f9;
+  border-top: 1px solid #dcdee2;
+}
+.test-wrap .test-content {
+  overflow-y: auto;
+  font-size: 15px;
+}
+.test-wrap .test-content .qst-title {
+  font-size: 15px;
+  line-height: 20px;
+}
+.test-wrap .test-content .one-title {
+  margin-bottom: 6px;
+  font-weight: bold;
+  font-size: 16px;
+}
+.test-wrap .test-content .form {
+  padding: 10px 5%;
+}
+.result-wrap {
+  background-color: #fff;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  font-size: 26px;
+  font-weight: bold;
+  color: #333333;
+  position: relative;
+}
+.result-wrap span {
+  display: inline-block;
+  margin-right: 5px;
+  font-size: 30px;
+}
+.result-wrap p {
+  margin-bottom: -40px;
+}
+.result-wrap .bottom {
+  position: absolute;
+  bottom: 20px;
+  line-height: 40px;
+  text-align: center;
+}
+.you-answer {
+  color: #26A386;
+  background-color: rgba(38, 163, 134, 0.15);
+  padding: 10px 15px;
+  margin-top: 5px;
+  line-height: 24px;
+  margin-left: 15px;
+  font-size: 15px;
+}
+.you-answer span {
+  font-weight: normal;
+}
+.green {
+  color: #26A386;
+  background-color: rgba(38, 163, 134, 0.15);
+}
+.red {
+  color: #F53D3D;
+  background-color: rgba(245, 61, 61, 0.15);
+}
+.picture-box {
+  margin-left: 25px;
+  margin-top: 10px;
+  text-align: left;
+}
+.picture-box img {
+  width: 30%;
+  margin: 15px 0;
+  height: auto;
+}
+.video-box {
+  margin-left: 25px;
+  margin-top: 10px;
+  text-align: left;
+}
+.video-box video {
+  width: 40%;
+}

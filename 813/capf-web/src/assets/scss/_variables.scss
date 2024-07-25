@@ -1,0 +1,76 @@
+/**
+  * @description  站点主色 tips: 要达到整站主题修改效果, 请确保[$--color-primary]站点主色与[/src/element-ui-theme/index.js]文件中[import './element-[#17B3A3]/index.css']当前主题色一致
+  * @author yxm
+  * @date 2021-10-19
+  */
+
+$--color-primary: #17B3A3;
+$base-font-size: 14px;
+$base-font-size-small: 12px;
+$base-font-size-big: 16px; //
+$base-font-size13: 13px;
+$base-font-size14: 14px;
+$base-font-size15: 15px;
+$base-font-size16: 16px;
+
+// iview
+$iview--base-font-size13: 13px;
+$iview--base-font-size12: 12px;
+$iview--base-font-size14: 14px;
+
+// element
+$element--base-font-size13: 13px;
+$element--base-font-size12: 12px;
+$element--base-height: 32px;
+
+// Navbar
+$navbar--background-color-white: #ffffff;
+$navbar--background-color-gray: #666666;
+$navbar--background-color-navbar-brand:#212A39;
+$navbar--background-color-navbar-container: #ffffff;
+$navbar--border-color-slider-user-info: #f1f4f5;
+$navbar--color-black: #444444;
+$navbar--color-login-user-wrapper: #4d627b;
+$navbar--border-color-login-user-wrapper: #F5F6FA;
+$navbar--border-color-info-wrap: #399A84;
+$navbar--background-color-quick-menu: #fafafa;
+$navbar--color-quick-menu-item-hover: #303d4c;
+
+// Sidebar
+$sidebar--background-color-white: #ffffff;
+$sidebar--background-color-dark: #FFF;
+$sidebar--background-color-dark-active: #399A84;
+$sidebar--color-text-dark: #A6AAB4;
+$sidebar--color-text-dark-active: #ffffff;
+$sidebar--color--submenu__title: #A6AAB4;
+$sidebar--color--submenu__item-active: #ffffff;
+$sidebar--background--submenu--site-sidebar__inner: #212A39;
+$sidebar--background--menu--inline: #1D2531;
+$sidebar--border-menu-item-active: #399A84;
+$sidebar--border: #454A46;
+
+// Content
+$content--background-color: #E7EBEE;
+$content--background-color-white: #ffffff;
+$content--border-color-details-title: #e9e9e9;
+$content--color-black: #333;
+$content--color-black-i: #444;
+$content--color-a: #29A387;
+
+// table
+$table--background-color: #29A387;
+
+// index
+$index--color-white: #ffffff;
+$index--color-red: #FF4747;
+$index--color-blue: #539BFE;
+$index--color-orange: #FFA058;
+$index--color-yellow: #FFC816;
+$index--color-green: #219379;
+$index--color: #29A387;
+$index--color-hover: #F1FFFD; // 表格鼠标移入或者鼠标选中颜色
+$index--border-color-input: #CAD1DE;
+$index--color-input: #666666;
+$index--background-color-input: #F6F6F8;
+
+

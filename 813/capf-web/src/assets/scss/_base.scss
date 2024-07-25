@@ -1,0 +1,215 @@
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+  font-size: 14px;
+  line-height: 1.15;
+  color: #303133;
+  background-color: #fff;
+}
+
+a {
+  color: mix(#fff, $--color-primary, 20%);
+  text-decoration: none !important;
+
+  &:focus,
+  &:hover {
+    color: $--color-primary;
+    text-decoration: underline;
+  }
+}
+
+img {
+  vertical-align: middle;
+}
+
+.img-circle {
+  border-radius: 50%;
+}
+
+/* Utils
+------------------------------ */
+.clearfix:before,
+.clearfix:after {
+  content: " ";
+  display: table;
+}
+
+.clearfix:after {
+  clear: both;
+}
+
+
+/* Animation
+------------------------------ */
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity .5s;
+}
+
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
+}
+
+
+/* Reset element-ui
+------------------------------ */
+.site-wrapper {
+  .el-pagination {
+    margin-top: 15px;
+    text-align: right;
+  }
+}
+
+
+/* Layout
+------------------------------ */
+.site-wrapper {
+  position: relative;
+  min-width: 1180px;
+}
+
+
+/* Sidebar fold
+------------------------------ */
+.site-content__wrapper {
+  overflow-y: auto;
+}
+.site-sidebar--fold {
+
+  .site-navbar__header,
+  .site-navbar__brand,
+  .site-sidebar,
+  .site-sidebar__inner,
+  .el-menu.site-sidebar__menu {
+    width: 58px;
+  }
+
+  .site-navbar__body,
+  .site-content__wrapper {
+    margin-left: 58px;
+  }
+
+  .site-navbar__brand {
+    &-lg {
+      display: none;
+    }
+
+    &-mini {
+      display: inline-block;
+    }
+  }
+
+  .site-sidebar,
+  .site-sidebar__inner {
+    overflow: initial;
+  }
+
+  .site-sidebar__menu-icon {
+    margin-right: 0;
+    font-size: 20px;
+  }
+
+  .site-content--tabs>.el-tabs>.el-tabs__header {
+    left: 60px;
+  }
+}
+
+// animation
+.site-navbar__header,
+.site-navbar__brand,
+.site-navbar__body,
+.site-sidebar,
+.site-sidebar__inner,
+.site-sidebar__menu.el-menu,
+.site-sidebar__menu-icon,
+.site-content__wrapper,
+.site-content--tabs>.el-tabs .el-tabs__header {
+  transition: inline-block .3s, left .3s, width .3s, margin-left .3s, font-size .3s;
+}
+
+// element.css 
+.el-card__body {
+  padding: 10px !important;
+}
+
+.el-submenu {
+  cursor: pointer;
+}
+
+.el-tabs__header,
+.el-menu--collapse {
+  // border-left: 2px solid #3E8EF7;
+  border-top: 2px solid #3E8EF7;
+}
+
+.el-menu--vertical .el-menu--popup .el-menu-item {
+  height: 42px;
+  line-height: 42px;
+}
+
+// iview.css
+.ivu-divider-horizontal {
+  height: 1px;
+  margin: 0px 0 0px 0;
+}
+
+.ivu-divider-horizontal.ivu-divider-dashed {
+  // border-top-color: #3E8EF7;
+}
+
+.ivu-drawer-content {
+  border: none;
+}
+
+.pad-lft-no .ivu-table-cell {
+  padding: 0 !important;
+}
+
+.ivu-table-fixed-right::before,
+.ivu-table-fixed::before {
+  height: 0;
+}
+
+
+// 其他公用
+.content-left-wrapper {
+  display: flex;
+  flex-direction: row;
+
+  .config-wrapper {
+    max-width: 30%;
+    padding-right: 10px;
+    background: #FFF;
+
+    &-content {
+      padding: 20px;
+      height: 100%;
+      width: 100%;
+      background: #F5F6FA;
+    }
+  }
+
+  .table-wrapper {
+    flex: 1;
+  }
+}
+.position-header {
+  position: absolute;
+  left: 0;
+  right: 0;
+}
+.fixed-header-panel {
+  position: fixed;
+  width: 100%;
+  height: 120px;
+  padding-bottom: 0;
+}
+.fixed-header-table {
+  padding-top: 110px;
+}

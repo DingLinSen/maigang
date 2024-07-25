@@ -1,0 +1,194 @@
+.login-wrapper {
+  position: relative;
+  min-height: 460px;
+  min-width: 760px;
+  overflow: hidden;
+  background-color: #E7EBEE;
+  .login-top{
+    height: 15vh;
+    p{
+      line-height: 15vh;
+      font-size: 3.5vh;
+      font-family: Microsoft YaHei;
+      font-weight: bold;
+      color: #222222;
+      margin-left: 10vw;
+      img{
+        height: 3.2vh;
+        margin-right: 6px;
+        margin-top: -0.3vh;
+      }
+    }
+  }
+  .login-content{
+    height: 70vh;
+    width: 80vw;
+    margin-left: 10vw;
+    display: flex;
+    .content-left{
+      width: 47.5%;
+      background: #FFFFFF;
+      border-radius: 10px 0px 0px 10px;
+    }
+    .content-right{
+      width: 52.5%;
+      background-color: #F9F9F9;
+      border-radius: 0px 10px 10px 0px;
+      line-height: 70vh;
+      img{
+         width: 81.7%;
+         margin-left: 5%;
+      }
+    }
+  }
+  .login-bottom{
+    height: 15vh;
+    p{
+      line-height: 15vh;
+      text-align: center;
+    }
+  }
+  .info-content{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center; /*定义body的元素垂直居中*/
+    justify-content: center; /*定义body的里的元素水平居中*/
+  }
+  &:before {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    width: 100%;
+    height: 100%;
+    content: "";
+    background-image: url(~@/assets/images/login_bg.jpg);
+    background-size:100% 100%;
+    background-size: cover;
+  }
+  .login-main {
+    text-align: center;
+    width: 65%;
+    // background-color: #fff;
+    border-radius: 2px;
+    // padding: 2.5% 0 3% 0 ;
+  }
+    .login-title {
+      font-family: Microsoft YaHei;
+      font-weight: 400;
+      text-align: left;
+      p{
+        &:first-child{
+          font-size: 2.8vh;
+          font-family: Microsoft YaHei;
+          font-weight: 400;
+          color: #222222;
+        }
+        &:last-child{
+          font-size: 1.5vh;
+          color: #666666;
+          margin-top: 1.5vh;
+          margin-bottom: 5vh;
+        }
+      }
+    }
+    .tab-title{
+      font-size: 1em;
+      padding-top: 4%;
+      padding-bottom: 5%;
+      text-align: center;
+    }
+    .login-btn {
+      width: 100%;
+      border: none;
+      font-size: 1em;
+      color:#fff;
+      &:hover{
+        width: 100%;
+        font-size: 1em;
+        color:#fff;
+      }
+    }
+    /deep/.ivu-form-item-content{
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .code-img {
+      width: 33.5%;
+      height: 32px;
+      padding-left: 1%;
+      display: inline-block;
+      cursor: pointer;
+    }
+    .maven{
+      width: 17%;
+      height: 28px;
+      display: inline-block;
+      text-align: right;
+    }
+    .maven:hover{
+      cursor: pointer;
+    }
+  }
+  .message{
+    margin: 0 auto;
+    text-align: center;
+    width: 100%;
+    color: #fff;
+    position: absolute;
+    bottom: 7%;
+  }
+// @media screen and (max-width: 768px) {
+//   .login-wrapper .login-main .login-title{
+//     font-size: 1.2em;
+//   }
+//   .login-wrapper .login-main{
+//     padding: 4% 5%;
+//     height: 60%;
+//     width: 60%;
+//     text-align: center;
+//   }
+// }
+// /*ipad*/
+// @media screen and (min-width:768px) and (max-width: 1025px) {
+//   .login-wrapper .login-main .login-title{
+//     font-size: 1.3em;
+//   }
+//   .login-wrapper .login-main{
+//     padding: 4% 5%;
+//     height: 60%;
+//     width: 55%;
+//     text-align: center;
+//   }
+// }
+// /*1280 1366*/
+@media screen and (min-width: 1000px)  {
+  .login-btn{
+    margin-top: 4vh;
+  }
+}
+// @media screen and (max-width: 920px){
+//   .login-title {
+//     p{
+//       &:first-child{
+//         font-size: 18px;
+//       }
+//       &:last-child{
+//         font-size: 12px;
+//       }
+//     }
+//   }
+// }
+// /*1920*/
+// @media screen and (min-width: 1368px) and (max-width: 1440px) {
+//   .login-wrapper .login-main .login-title{
+//     font-size: 1.6em;
+//   }
+//   .login-main {
+//     padding: 4% 5%;
+//     width: 40%;
+//     height: 62%;
+//   }
+// }

@@ -1,0 +1,20 @@
+<svg 
+ xmlns="http://www.w3.org/2000/svg"
+ xmlns:xlink="http://www.w3.org/1999/xlink"
+ width="60px" height="61px">
+<defs>
+<linearGradient id="PSgrad_0" x1="0%" x2="0%" y1="100%" y2="0%">
+  <stop offset="0%" stop-color="rgb(0,142,228)" stop-opacity="1" />
+  <stop offset="100%" stop-color="rgb(0,159,255)" stop-opacity="1" />
+</linearGradient>
+<linearGradient id="PSgrad_1" x1="0%" x2="0%" y1="100%" y2="0%">
+  <stop offset="0%" stop-color="rgb(198,233,255)" stop-opacity="1" />
+  <stop offset="100%" stop-color="rgb(253,253,253)" stop-opacity="1" />
+</linearGradient>
+
+</defs>
+<path fill-rule="evenodd"  fill="url(#PSgrad_0)"
+ d="M30.000,-0.000 C46.568,-0.000 60.000,13.431 60.000,30.000 C60.000,46.569 46.568,60.000 30.000,60.000 C13.431,60.000 -0.000,46.569 -0.000,30.000 C-0.000,13.431 13.431,-0.000 30.000,-0.000 Z"/>
+<path fill-rule="evenodd"  fill="url(#PSgrad_1)"
+ d="M35.915,45.242 L35.930,44.427 C39.532,41.721 41.283,36.948 41.283,29.880 C41.283,23.065 37.321,18.997 30.679,18.997 L30.320,18.997 C23.686,18.997 19.717,23.065 19.717,29.880 C19.717,36.914 21.483,41.688 25.116,44.410 L25.116,45.234 C19.068,46.108 13.005,48.696 13.005,52.655 C13.005,58.193 18.889,61.000 30.500,61.000 C42.111,61.000 47.994,58.193 47.994,52.655 C47.994,48.705 41.947,46.116 35.915,45.242 L35.915,45.242 Z"/>
+</svg>

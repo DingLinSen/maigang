@@ -1,0 +1,161 @@
+@import "~@/assets/scss/_variables.scss";
+/* Sidebar
+------------------------------ */
+.site-sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  z-index: 100;
+  width: 235px;
+  top: 60px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+
+  &--dark,
+  &--dark-popper {
+    background-color: $sidebar--background-color-dark;
+
+    .site-sidebar__menu.el-menu,
+    >.el-menu--popup {
+      background-color: $sidebar--background-color-dark;
+
+      .el-menu-item,
+      .el-submenu>.el-submenu__title {
+        color: $sidebar--color-text-dark;
+        &:focus,
+        &:hover {
+          color: mix(rgb(255, 255, 255), $sidebar--color-text-dark, 50%);
+          background-color: mix($sidebar--background-color-white, $sidebar--background-color-dark, 2.5%);
+        }
+      }
+
+      .el-submenu.is-opened>.el-submenu__title {
+        font-weight: 600;
+        font-size: $base-font-size-big;
+      }
+
+      .el-menu-item.is-active {
+        background-color: $sidebar--background-color-dark-active;
+        i{
+          font-size: 18px;
+          color: $sidebar--color--submenu__item-active;
+        }
+        &:hover{
+          background:  $sidebar--background-color-dark-active !important;
+        }
+        span{
+          color: $sidebar--color--submenu__item-active;
+        }
+      }
+
+      .el-submenu.is-active.is-opened>.el-submenu__title {
+        font-weight: 600;
+        font-size: $base-font-size;
+      }
+
+      .el-menu-item.is-active,
+      .el-submenu.is-active.is-opened>.el-submenu__title {
+        color: $sidebar--color-text-dark-active;
+        font-weight: 600;
+      }
+    }
+  }
+
+  &__inner {
+    position: relative;
+    z-index: 1;
+    width: 235px;
+    padding-bottom: 15px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    overflow-x: hidden;
+    flex: 1;
+  }
+
+  &__menu.el-menu {
+    width: 235px;
+    border-right: 0;
+  }
+
+  &__menu-icon {
+    width: 24px;
+    margin-right: 5px;
+    text-align: center;
+    font-size: $base-font-size-big;
+    color: inherit !important;
+  }
+}
+// 配置静态首页
+.index-wrap{
+  padding: 20px;
+  color: #92a3b5;
+  font-size: $base-font-size-big;
+  font-weight: bold;
+}
+
+.site-sidebar__inner {
+  width: 240px;
+  background: $sidebar--background--submenu--site-sidebar__inner !important;
+  .el-menu{
+    background: $sidebar--background--submenu--site-sidebar__inner !important;
+    .el-menu--inline{
+      // background: $sidebar--background--menu--inline !important;
+    }
+  }
+}
+.el-submenu__title{
+  color: $sidebar--color--submenu__title !important;
+  font-size: 15px !important;
+  &:hover{
+    background: $sidebar--background--menu--inline !important;
+  }
+  .el-icon-arrow-down{
+    font-size: 16px !important;
+    font-weight: bold;
+  }
+}
+.el-menu-item.is-active {
+  background-color: $sidebar--background-color-dark-active;
+}
+.site-sidebar__menu{
+  .is-active{
+    color: #FFFFFF !important;
+    background-color: $sidebar--background--menu--inline;
+    .el-menu-item{
+      border: none !important;
+      background-color: $sidebar--background--menu--inline;
+    }
+  }
+}
+.el-menu-item{
+  border-bottom: none !important;
+  border-top: none !important;
+  border-right: none !important;
+  // border-top: 1px solid $sidebar--background--menu--inline !important; /*no*/
+  i{
+    font-size: 18px;
+    color: $sidebar--color-text-dark;
+  }
+  span{
+    color: $sidebar--color-text-dark;
+    font-size: $base-font-size15;
+    font-family: Microsoft YaHei;
+  }
+  &:hover{
+    background:  $sidebar--background--menu--inline !important;
+  }
+}
+.site-sidebar__menu.el-menu{
+  border: none;
+}
+.site-sidebar--dark-popper{
+  background: $sidebar--background--submenu--site-sidebar__inner !important;
+  .el-menu--popup{
+    background:  $sidebar--background--submenu--site-sidebar__inner;
+  }
+}
+.el-submenu{
+  // border-top: 1px solid $sidebar--border; /*no*/
+}

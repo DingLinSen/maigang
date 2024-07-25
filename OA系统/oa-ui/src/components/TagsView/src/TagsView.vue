@@ -1,0 +1,693 @@
+<script setup lang="ts">
+import { onMounted, watch, computed, unref, ref, nextTick } from 'vue'
+import { useRouter } from 'vue-router'
+import type { RouteLocationNormalizedLoaded, RouterLinkProps } from 'vue-router'
+import { usePermissionStore } from '@/store/modules/permission'
+import { useTagsViewStore } from '@/store/modules/tagsView'
+import { useAppStore } from '@/store/modules/app'
+import { useI18n } from '@/hooks/web/useI18n'
+import { filterAffixTags } from './helper'
+import { ContextMenu, ContextMenuExpose } from '@/components/ContextMenu'
+import { useDesign } from '@/hooks/web/useDesign'
+import { useTemplateRefsList } from '@vueuse/core'
+import { ElScrollbar } from 'element-plus'
+import { useScrollTo } from '@/hooks/event/useScrollTo'
+
+const { getPrefixCls } = useDesign()
+
+const prefixCls = getPrefixCls('tags-view')
+
+const { t } = useI18n()
+
+const { currentRoute, push, replace } = useRouter()
+
+const permissionStore = usePermissionStore()
+
+const routers = computed(() => permissionStore.getRouters)
+
+const tagsViewStore = useTagsViewStore()
+
+const visitedViews = computed(() => tagsViewStore.getVisitedViews)
+
+const affixTagArr = ref<RouteLocationNormalizedLoaded[]>([])
+
+const appStore = useAppStore()
+
+const tagsViewIcon = computed(() => appStore.getTagsViewIcon)
+
+// 初始化tag
+const initTags = () => {
+  affixTagArr.value = filterAffixTags(unref(routers))
+  for (const tag of unref(affixTagArr)) {
+    // Must have tag name
+    if (tag.name) {
+      tagsViewStore.addVisitedView(tag)
+    }
+  }
+}
+
+const selectedTag = ref<RouteLocationNormalizedLoaded>()
+
+// 新增tag
+const addTags = () => {
+  const { name } = unref(currentRoute)
+  if (name) {
+    selectedTag.value = unref(currentRoute)
+    tagsViewStore.addView(unref(currentRoute))
+  }
+  return false
+}
+
+// 关闭选中的tag
+const closeSelectedTag = (view: RouteLocationNormalizedLoaded) => {
+  if (view?.meta?.affix) return
+  tagsViewStore.delView(view)
+  if (isActive(view)) {
+    toLastView()
+  }
+}
+
+// 关闭全部
+const closeAllTags = () => {
+  tagsViewStore.delAllViews()
+  toLastView()
+}
+
+// 关闭其他
+const closeOthersTags = () => {
+  tagsViewStore.delOthersViews(unref(selectedTag) as RouteLocationNormalizedLoaded)
+}
+
+// 重新加载
+const refreshSelectedTag = async (view?: RouteLocationNormalizedLoaded) => {
+  if (!view) return
+  tagsViewStore.delCachedView()
+  const { path, query } = view
+  await nextTick()
+  replace({
+    path: '/redirect' + path,
+    query: query
+  })
+}
+
+// 关闭左侧
+const closeLeftTags = () => {
+  tagsViewStore.delLeftViews(unref(selectedTag) as RouteLocationNormalizedLoaded)
+}
+
+// 关闭右侧
+const closeRightTags = () => {
+  tagsViewStore.delRightViews(unref(selectedTag) as RouteLocationNormalizedLoaded)
+}
+
+// 跳转到最后一个
+const toLastView = () => {
+  const visitedViews = tagsViewStore.getVisitedViews
+  const latestView = visitedViews.slice(-1)[0]
+  if (latestView) {
+    push(latestView)
+  } else {
+    let url = ''
+    let routerList: any = permissionStore.getAddRouters[0]
+    // url = getRouterLast(routerList)
+    if (routerList && routerList.children?.length > 0) {
+      url = `${routerList.path === '/' ? '' : routerList.path}/${routerList.children[0].path}`
+
+      if (routerList.children.find((s) => s.isDefaultHidden)) {
+        let list = routerList.children.find((s) => !s.isDefaultHidden)
+        url = `${list.path}`
+      }
+    } else {
+      url = routerList.path
+    }
+    if (unref(currentRoute).path === url || unref(currentRoute).path === routerList.redirect) {
+      addTags()
+      return
+    }
+    // You can set another route
+    push(url)
+    // if (
+    //   unref(currentRoute).path === permissionStore.getAddRouters[0].path ||
+    //   unref(currentRoute).path === permissionStore.getAddRouters[0].redirect
+    // ) {
+    //   addTags()
+    //   return
+    // }
+    // // You can set another route
+    // push(permissionStore.getAddRouters[0].path)
+  }
+}
+// 获取路由最后一个
+const getRouterLast = (list: any) => {
+  let url: any = ''
+  if (list && list.children?.length > 0) {
+    if (list.path == '/') {
+      url = ''
+    } else {
+      url = list.path + '/' + list.children[0].path
+      if (list.children[0].children && list.children[0].children.length > 0) {
+        url += '/' + getRouterLast(list.children[0].children[0])
+      }
+    }
+    // url = `${list.path === '/' ? '' : list.path}/${list.children[0].path} `
+  } else {
+    url = list.path
+  }
+  return url
+}
+// 滚动到选中的tag
+const moveToCurrentTag = async () => {
+  await nextTick()
+  for (const v of unref(visitedViews)) {
+    if (v.fullPath === unref(currentRoute).path) {
+      moveToTarget(v)
+      if (v.fullPath !== unref(currentRoute).fullPath) {
+        tagsViewStore.updateVisitedView(unref(currentRoute))
+      }
+
+      break
+    }
+  }
+}
+
+const tagLinksRefs = useTemplateRefsList<RouterLinkProps>()
+
+const moveToTarget = (currentTag: RouteLocationNormalizedLoaded) => {
+  const wrap$ = unref(scrollbarRef)?.wrapRef
+  let firstTag: Nullable<RouterLinkProps> = null
+  let lastTag: Nullable<RouterLinkProps> = null
+
+  const tagList = unref(tagLinksRefs)
+  // find first tag and last tag
+  if (tagList.length > 0) {
+    firstTag = tagList[0]
+    lastTag = tagList[tagList.length - 1]
+  }
+  if ((firstTag?.to as RouteLocationNormalizedLoaded).fullPath === currentTag.fullPath) {
+    // 直接滚动到0的位置
+    const { start } = useScrollTo({
+      el: wrap$!,
+      position: 'scrollLeft',
+      to: 0,
+      duration: 500
+    })
+    start()
+  } else if ((lastTag?.to as RouteLocationNormalizedLoaded).fullPath === currentTag.fullPath) {
+    // 滚动到最后的位置
+    const { start } = useScrollTo({
+      el: wrap$!,
+      position: 'scrollLeft',
+      to: wrap$!.scrollWidth - wrap$!.offsetWidth,
+      duration: 500
+    })
+    start()
+  } else {
+    // find preTag and nextTag
+    const currentIndex: number = tagList.findIndex(
+      (item) => (item?.to as RouteLocationNormalizedLoaded).fullPath === currentTag.fullPath
+    )
+    const tgsRefs = document.getElementsByClassName(`${prefixCls}__item`)
+
+    const prevTag = tgsRefs[currentIndex - 1] as HTMLElement
+    const nextTag = tgsRefs[currentIndex + 1] as HTMLElement
+
+    // the tag's offsetLeft after of nextTag
+    const afterNextTagOffsetLeft = nextTag.offsetLeft + nextTag.offsetWidth + 4
+
+    // the tag's offsetLeft before of prevTag
+    const beforePrevTagOffsetLeft = prevTag.offsetLeft - 4
+
+    if (afterNextTagOffsetLeft > unref(scrollLeftNumber) + wrap$!.offsetWidth) {
+      const { start } = useScrollTo({
+        el: wrap$!,
+        position: 'scrollLeft',
+        to: afterNextTagOffsetLeft - wrap$!.offsetWidth,
+        duration: 500
+      })
+      start()
+    } else if (beforePrevTagOffsetLeft < unref(scrollLeftNumber)) {
+      const { start } = useScrollTo({
+        el: wrap$!,
+        position: 'scrollLeft',
+        to: beforePrevTagOffsetLeft,
+        duration: 500
+      })
+      start()
+    }
+  }
+}
+
+// 是否是当前tag
+const isActive = (route: RouteLocationNormalizedLoaded): boolean => {
+  return route.path === unref(currentRoute).path
+}
+
+// 所有右键菜单组件的元素
+const itemRefs = useTemplateRefsList<ComponentRef<typeof ContextMenu & ContextMenuExpose>>()
+
+// 右键菜单装填改变的时候
+const visibleChange = (visible: boolean, tagItem: RouteLocationNormalizedLoaded) => {
+  if (visible) {
+    for (const v of unref(itemRefs)) {
+      const elDropdownMenuRef = v.elDropdownMenuRef
+      if (tagItem.fullPath !== v.tagItem.fullPath) {
+        elDropdownMenuRef?.handleClose()
+      }
+    }
+  }
+}
+
+// elscroll 实例
+const scrollbarRef = ref<ComponentRef<typeof ElScrollbar>>()
+
+// 保存滚动位置
+const scrollLeftNumber = ref(0)
+
+const scroll = ({ scrollLeft }) => {
+  scrollLeftNumber.value = scrollLeft as number
+}
+
+// 移动到某个位置
+const move = (to: number) => {
+  const wrap$ = unref(scrollbarRef)?.wrapRef
+  const { start } = useScrollTo({
+    el: wrap$!,
+    position: 'scrollLeft',
+    to: unref(scrollLeftNumber) + to,
+    duration: 500
+  })
+  start()
+}
+
+onMounted(() => {
+  initTags()
+  addTags()
+})
+
+watch(
+  () => currentRoute.value,
+  () => {
+    addTags()
+    moveToCurrentTag()
+  }
+)
+</script>
+
+<template>
+  <div class="tags-view-cont">
+    <div
+      :id="prefixCls"
+      :class="prefixCls"
+      class="flex w-full relative bg-[#fff] dark:bg-[var(--el-bg-color)] 2xl:top-10px top-6px"
+      style="box-shadow: 0px 3px 4px 0px rgba(31, 31, 31, 0.2); z-index: 99"
+    >
+      <span
+        :class="`${prefixCls}__tool`"
+        id="view-bar"
+        style="display: flex; text-align: center; justify-content: center; align-items: center"
+        class="2xl:w-[var(--tags-view-height)] 2xl:h-[var(--tags-view-height)] w-[var(--tags-view-smal-screen-height)] h-[var(--tags-view-smal-screen-height)] leading-[var(--tags-view-smal-screen-height)] text-center 2xl:leading-[var(--tags-view-height)] cursor-pointer"
+        @click="move(-200)"
+      >
+        <!-- <Icon
+        icon="ep:d-arrow-left"
+        :color="appStore.getIsDark ? 'var(--el-text-color-regular)' : '#333'"
+      /> -->
+        <img class="img-class" src="@/assets/svgs/left.svg" />
+      </span>
+      <div class="overflow-hidden flex-1">
+        <ElScrollbar ref="scrollbarRef" class="h-full" @scroll="scroll">
+          <div class="flex h-full">
+            <ContextMenu
+              :ref="itemRefs.set"
+              :schema="[
+                {
+                  icon: 'ant-design:sync-outlined',
+                  label: t('common.reload'),
+                  disabled: selectedTag?.fullPath !== item.fullPath,
+                  command: () => {
+                    refreshSelectedTag(item)
+                  }
+                },
+                {
+                  icon: 'ant-design:close-outlined',
+                  label: t('common.closeTab'),
+                  disabled: !!visitedViews?.length && selectedTag?.meta.affix,
+                  command: () => {
+                    closeSelectedTag(item)
+                  }
+                },
+                {
+                  divided: true,
+                  icon: 'ant-design:vertical-right-outlined',
+                  label: t('common.closeTheLeftTab'),
+                  disabled:
+                    !!visitedViews?.length &&
+                    (item.fullPath === visitedViews[0].fullPath ||
+                      selectedTag?.fullPath !== item.fullPath),
+                  command: () => {
+                    closeLeftTags()
+                  }
+                },
+                {
+                  icon: 'ant-design:vertical-left-outlined',
+                  label: t('common.closeTheRightTab'),
+                  disabled:
+                    !!visitedViews?.length &&
+                    (item.fullPath === visitedViews[visitedViews.length - 1].fullPath ||
+                      selectedTag?.fullPath !== item.fullPath),
+                  command: () => {
+                    closeRightTags()
+                  }
+                },
+                {
+                  divided: true,
+                  icon: 'ant-design:tag-outlined',
+                  label: t('common.closeOther'),
+                  disabled: selectedTag?.fullPath !== item.fullPath,
+                  command: () => {
+                    closeOthersTags()
+                  }
+                },
+                {
+                  icon: 'ant-design:line-outlined',
+                  label: t('common.closeAll'),
+                  command: () => {
+                    closeAllTags()
+                  }
+                }
+              ]"
+              v-for="item in visitedViews"
+              :key="item.fullPath"
+              :tag-item="item"
+              :class="[
+                `${prefixCls}__item`,
+                item?.meta?.affix ? `${prefixCls}__item--affix` : '',
+                {
+                  'is-active': isActive(item)
+                }
+              ]"
+              @visible-change="visibleChange"
+            >
+              <div>
+                <router-link :ref="tagLinksRefs.set" :to="{ ...item }" custom v-slot="{ navigate }">
+                  <div
+                    @click="navigate"
+                    class="h-full flex justify-center items-center whitespace-nowrap pl-30px text-14px"
+                    style="font-weight: 400; color: #222222"
+                  >
+                    <!-- <Icon
+                                          v-if="
+                                            item?.matched &&
+                                            item?.matched[1] &&
+                                            item?.matched[1]?.meta?.icon &&
+                                            tagsViewIcon
+                                          "
+                                          :icon="item?.matched[1]?.meta?.icon"
+                                          :size="12"
+                                          class="mr-5px"
+                                        /> -->
+                    {{ t(item?.meta?.title as string) }}
+                    <div
+                      :class="`${prefixCls}__item--close`"
+                      @click.prevent.stop="closeSelectedTag(item)"
+                    ></div>
+                  </div>
+                </router-link>
+              </div>
+            </ContextMenu>
+          </div>
+        </ElScrollbar>
+      </div>
+      <span
+        :class="`${prefixCls}__tool`"
+        style="display: flex; text-align: center; justify-content: center; align-items: center"
+        class="2xl:w-[var(--tags-view-height)] 2xl:h-[var(--tags-view-height)] w-[var(--tags-view-smal-screen-height)] h-[var(--tags-view-smal-screen-height)] leading-[var(--tags-view-smal-screen-height)] text-center 2xl:leading-[var(--tags-view-height)] cursor-pointer"
+        @click="move(200)"
+      >
+        <!-- <Icon
+        icon="ep:d-arrow-right"
+        :color="appStore.getIsDark ? 'var(--el-text-color-regular)' : '#333'"
+      /> -->
+        <img class="img-class" src="@/assets/svgs/right.svg" />
+      </span>
+      <span
+        :class="`${prefixCls}__tool`"
+        style="display: flex; text-align: center; justify-content: center; align-items: center"
+        class="2xl:w-[var(--tags-view-height)] 2xl:h-[var(--tags-view-height)] w-[var(--tags-view-smal-screen-height)] h-[var(--tags-view-smal-screen-height)] leading-[var(--tags-view-smal-screen-height)] text-center 2xl:leading-[var(--tags-view-height)] cursor-pointer"
+        @click="refreshSelectedTag(selectedTag)"
+      >
+        <!-- <Icon
+        icon="ant-design:reload-outlined"
+        :color="appStore.getIsDark ? 'var(--el-text-color-regular)' : '#333'"
+      /> -->
+        <img class="img-class" src="@/assets/svgs/refresh_icon.svg" />
+      </span>
+      <ContextMenu
+        trigger="click"
+        :schema="[
+        {
+          icon: 'ant-design:sync-outlined',
+          label: t('common.reload'),
+          command: () => {
+            refreshSelectedTag(selectedTag)
+          }
+        },
+        {
+          icon: 'ant-design:close-outlined',
+          label: t('common.closeTab'),
+          disabled: !!visitedViews?.length && selectedTag?.meta.affix,
+          command: () => {
+            closeSelectedTag(selectedTag!)
+          }
+        },
+        {
+          divided: true,
+          icon: 'ant-design:vertical-right-outlined',
+          label: t('common.closeTheLeftTab'),
+          disabled: !!visitedViews?.length && selectedTag?.fullPath === visitedViews[0].fullPath,
+          command: () => {
+            closeLeftTags()
+          }
+        },
+        {
+          icon: 'ant-design:vertical-left-outlined',
+          label: t('common.closeTheRightTab'),
+          disabled:
+            !!visitedViews?.length &&
+            selectedTag?.fullPath === visitedViews[visitedViews.length - 1].fullPath,
+          command: () => {
+            closeRightTags()
+          }
+        },
+        {
+          divided: true,
+          icon: 'ant-design:tag-outlined',
+          label: t('common.closeOther'),
+          command: () => {
+            closeOthersTags()
+          }
+        },
+        {
+          icon: 'ant-design:line-outlined',
+          label: t('common.closeAll'),
+          command: () => {
+            closeAllTags()
+          }
+        }
+      ]"
+      >
+        <span
+          style="display: flex; text-align: center; justify-content: center; align-items: center"
+          :class="`${prefixCls}__tool`"
+          class="leading-[var(--tags-view-smal-screen-height)] w-[var(--tags-view-smal-screen-height)] h-[var(--tags-view-smal-screen-height)] 2xl:w-[var(--tags-view-height)] 2xl:h-[var(--tags-view-height)] text-center 2xl:leading-[var(--tags-view-height)] cursor-pointer block"
+        >
+          <!-- <Icon
+          icon="ant-design:setting-outlined"
+          :color="appStore.getIsDark ? 'var(--el-text-color-regular)' : '#333'"
+        /> -->
+          <img class="img-class" src="@/assets/svgs/set.svg" />
+        </span>
+      </ContextMenu>
+    </div>
+  </div>
+</template>
+
+<style lang="less" scoped>
+.img-class {
+  width: 15px;
+  height: 15px;
+}
+.tags-view-cont {
+  padding-left: 11px;
+  padding-right: 7px;
+}
+@prefix-cls: ~'@{namespace}-tags-view';
+
+.@{prefix-cls} {
+  :deep(.@{elNamespace}-scrollbar__view) {
+    height: 100%;
+  }
+
+  &__tool {
+    position: relative;
+
+    &:hover {
+      :deep(span) {
+        color: var(--el-color-black) !important;
+      }
+    }
+
+    &:after {
+      position: absolute;
+      top: 1px;
+      left: 0;
+      width: 100%;
+      height: calc(~'100% - 1px');
+      border-right: 1px solid var(--tags-view-border-color);
+      border-left: 1px solid var(--tags-view-border-color);
+      content: '';
+    }
+  }
+
+  &__item {
+    position: relative;
+    top: 2px;
+    height: calc(~'100% - 4px');
+    padding-right: 30px;
+    font-size: 12px;
+    cursor: pointer;
+    border: 1px solid #d9d9d9;
+
+    &--close {
+      position: absolute;
+      top: 50%;
+      right: 5px;
+      display: none;
+      transform: translate(0, -50%);
+    }
+
+    &:not(.@{prefix-cls}__item--affix):hover {
+      .@{prefix-cls}__item--close {
+        top: 50%;
+        right: 12px;
+        width: 12px;
+        height: 12px;
+        display: block;
+      }
+    }
+  }
+
+  &__item:not(.is-active) {
+    &:hover {
+      color: var(--el-color-primary);
+
+      .@{prefix-cls}__item--close {
+        position: absolute;
+        top: 50%;
+        right: 15px;
+        width: 12px;
+        height: 12px;
+        background: url(@/assets/imgs/icon/close_icon.png) no-repeat center;
+        background-size: 100% 100%;
+
+        :deep(span) {
+          color: var(--el-color-white) !important;
+        }
+      }
+    }
+  }
+
+  &__item.is-active {
+    color: rgba(34, 34, 34, 1);
+    font-family: 'Alibaba PuHuiTi M';
+    // color: var(--el-color-white);
+    // background-color: var(--el-color-primary);
+    // border: 1px solid var(--el-color-primary);
+    &:hover {
+      color: var(--el-color-primary);
+    }
+
+    .@{prefix-cls}__item--close {
+      position: absolute;
+      top: 53%;
+      // transform: translateY(-50%);
+      right: 15px;
+      width: 12px;
+      height: 12px;
+      background: url(@/assets/imgs/icon/close_icon.png) no-repeat center;
+      background-size: 100% 100%;
+
+      :deep(span) {
+        color: var(--el-color-white) !important;
+      }
+    }
+  }
+
+  &__item.is-active::before {
+    content: '';
+    width: 100%;
+    height: 4px;
+    background-color: #00a0e9;
+    z-index: 999;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    display: inline-block;
+  }
+}
+
+.dark {
+  .@{prefix-cls} {
+    &__tool {
+      &:hover {
+        :deep(span) {
+          color: #fff !important;
+        }
+      }
+
+      &:after {
+        border-right: 1px solid var(--el-border-color);
+        border-left: 1px solid var(--el-border-color);
+      }
+    }
+
+    &__item {
+      position: relative;
+      top: 2px;
+      height: calc(~'100% - 4px');
+      padding-right: 25px;
+      font-size: 12px;
+      cursor: pointer;
+      border: 1px solid var(--el-border-color);
+    }
+
+    &__item:not(.is-active) {
+      &:hover {
+        color: var(--el-color-primary);
+      }
+    }
+
+    &__item.is-active {
+      color: var(--el-color-white);
+      background-color: var(--el-color-primary);
+
+      .@{prefix-cls}__item--close {
+        :deep(span) {
+          color: var(--el-color-white) !important;
+        }
+      }
+    }
+  }
+}
+
+:deep(.v-tags-view__item) {
+  height: 100% !important;
+  top: 0px !important;
+  border: none !important;
+  border-radius: 0px 0px 0px 2px;
+  border-right: 1px solid #e4ebf1 !important;
+  font-size: 15px;
+  font-weight: 400;
+  color: #222222;
+}
+</style>

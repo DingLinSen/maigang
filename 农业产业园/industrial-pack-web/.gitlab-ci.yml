@@ -1,0 +1,53 @@
+image: docker:20.10.16
+
+workflow:
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+    - if: '$CI_COMMIT_BRANCH =~ /^release-.*$/'
+
+variables:
+  DOCKER_TLS_CERTDIR: "/certs"
+
+# maven 缓存，不必每次打包都从远程仓库下载 jar 包
+cache:
+  paths:
+    - node_modules/
+
+stages:
+  - build
+  - package
+  - deploy
+
+npm-build:
+  image: node:16.14.0-alpine3.15
+  stage: build
+  script:
+    - npm config set strict-ssl false
+    - npm --registry https://registry.npm.taobao.org install pnpm@8.15.7 -g
+    - pnpm --registry https://registry.npm.taobao.org install
+    - pnpm run build:pro
+  artifacts:
+    paths:
+      - dist
+
+build-docker-image:
+  stage: package
+  services:
+    - name: docker:dind
+      entrypoint: [ "dockerd-entrypoint.sh", "--tls=false" ]
+  before_script:
+    - docker login harbor.mgdaas-int.com --username $HARBOR_USERNAME --password $HARBOR_PASSWORD
+  script:
+    - docker build  . -t harbor.mgdaas-int.com/ny/industrial-park-web:1.0.1 --build-arg ENV=qa
+    - docker push harbor.mgdaas-int.com/ny/industrial-park-web:1.0.1
+
+k8s-deploy:
+  stage: deploy
+  image: curlimages/curl:latest
+  script:
+    - |
+     curl -X PUT \
+      -H "Content-Type: application/yaml" \
+      -H "Cookie: KuboardUsername=liyg; KuboardAccessKey=imwnjddpannf.bjbstb86ebbhkwkrc5t7hb2ry8c5mnhf" \
+      -d '{"kind":"deployments","namespace":"industrial-park-dev","name":"industrial-park-web"}' \
+      "http://kuboard.mgdaas-int.com/kuboard-api/cluster/default/kind/CICDApi/liyg/resource/restartWorkload"

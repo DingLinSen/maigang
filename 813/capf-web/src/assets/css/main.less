@@ -1,0 +1,522 @@
+/**
+  * @description  全局样式声明，在main.js 引用
+  * @author yxm
+  * @date 2021-10-19
+  */
+@charset "UTF-8";
+@import 'transition.less';
+/deep/body,
+html {
+  font-size: 24px;
+}
+
+label {
+  margin-bottom: 0;
+}
+.mar-no {
+  margin: 0 !important;
+}
+
+.mar-all {
+  margin: 15px;
+}
+
+.mar-top {
+  margin-top: 15px;
+}
+
+.mar-t-0 {
+  margin-top: 0px;
+}
+.mar-top-5 {
+  margin-top: 5px;
+}
+
+.mar-top-10 {
+  margin-top: 10px;
+}
+
+.mar-btm {
+  margin-bottom: 10px;
+}
+
+.mar-btm-5 {
+  margin-bottom: 5px;
+}
+
+.mar-btm-10 {
+  margin-bottom: 10px;
+}
+.mar-btm-20 {
+  margin-bottom: 20px;
+}
+
+.mar-btm-30 {
+  margin-bottom: 30px;
+}
+
+.mar-lft {
+  margin-left: 15px;
+}
+
+.mar-lft-10 {
+  margin-left: 10px;
+}
+
+.mar-lft-30 {
+  margin-left: 30px;
+}
+
+.mar-rgt {
+  margin-right: 15px;
+}
+
+.mar-rgt-5 {
+  margin-right: 5px;
+}
+
+.mar-rgt-10 {
+  margin-right: 10px;
+}
+
+.mar-hor {
+  margin-left: 15px;
+  margin-right: 15px;
+}
+
+.mar-ver {
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+.pad-no {
+  padding: 0 !important;
+}
+
+.pad-all {
+  padding: 10px;
+}
+
+.pad-top-no {
+  padding-top: 0 !important;
+}
+
+.pad-top {
+  padding-top: 15px;
+}
+
+.pad-top-10 {
+  padding-top: 10px;
+}
+
+.pad-btm {
+  padding-bottom: 15px;
+}
+
+.pad-btm-30 {
+  padding-bottom: 30px;
+}
+
+.pad-lft {
+  padding-left: 15px;
+}
+
+.pad-lft-8 {
+  padding-left: 8px;
+}
+.pad-lft-10 {
+  padding-left: 10px;
+}
+
+.pad-rgt {
+  padding-right: 15px;
+}
+
+.pad-hor {
+  padding-left: 15px;
+  padding-right: 15px;
+  p {
+    margin-bottom: 10px;
+  }
+}
+
+.pad-ver {
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+
+.pad-t-b-20 {
+  padding: 20px 0;
+}
+
+.pad-all-20 {
+  padding: 20px;
+}
+.pad-t-b-40 {
+  padding: 40px 0;
+}
+
+.pad-l-r-20 {
+  padding: 0 20px;
+}
+
+.fl {
+  float: left;
+}
+
+.fr {
+  float: right;
+}
+
+.clear {
+  clear: both;
+}
+
+.c-black-grey {
+  color: #444;
+}
+
+.c-grey {
+  color: #555;
+}
+
+.bg-grey {
+  background-color: #f5f5f5;
+}
+
+.bg-white {
+  background-color: #fff;
+}
+
+.mar-bg {
+  background: #ecf0f5;
+  height: 3px;
+  width: 100%;
+}
+
+.mar-bg-10 {
+  background: #ecf0f5;
+  height: 10px;
+  width: 100%;
+}
+
+.bg-trans {
+  background-color: transparent;
+}
+
+.bg-light {
+  background-color: #fff;
+}
+
+.bg-light,
+.bg-light a {
+  color: #7a878e;
+}
+
+.bg-light a:hover,
+.bg-light a:focus {
+  color: #7a878e;
+}
+
+.bg-gray-light {
+  background-color: #f8f9fa;
+}
+
+.bg-gray-light,
+.bg-gray-light a {
+  color: #7a878e;
+}
+
+.bg-gray-light a:hover,
+.bg-gray-light a:focus {
+  color: #7a878e;
+}
+
+.bg-gray {
+  background-color: #e9eeef;
+}
+
+.bg-gray,
+.bg-gray a {
+  color: #7a878e;
+}
+
+.bg-gray a:hover,
+.bg-gray a:focus {
+  color: #7a878e;
+}
+
+.bg-gray-dark {
+  background-color: #cbd7da;
+}
+
+.bg-gray-dark,
+.bg-gray-dark a {
+  color: #7a878e;
+}
+
+.bg-gray-dark a:hover,
+.bg-gray-dark a:focus {
+  color: #7a878e;
+}
+
+.bg-trans-light {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.bg-trans-light,
+.bg-trans-light a {
+  color: inherit;
+}
+
+.bg-trans-light a:hover,
+.bg-trans-light a:focus {
+  color: inherit;
+}
+
+.bg-trans-dark {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.bg-trans-dark,
+.bg-trans-dark a {
+  color: inherit;
+}
+
+.bg-trans-dark a:hover,
+.bg-trans-dark a:focus {
+  color: inherit;
+}
+
+.bg-primary {
+  background-color: #209e3f;
+}
+
+.bg-primary,
+.bg-primary a {
+  color: #fff;
+}
+
+.bg-primary a:hover,
+.bg-primary a:focus {
+  color: #fff;
+}
+
+.bg-info {
+  background-color: #03a9f4;
+}
+
+.bg-info,
+.bg-info a {
+  color: #fff;
+}
+
+.bg-info a:hover,
+.bg-info a:focus {
+  color: #fff;
+}
+
+.bg-success {
+  background-color: #8bc34a;
+}
+
+.bg-success,
+.bg-success a {
+  color: #fff;
+}
+
+.bg-success a:hover,
+.bg-success a:focus {
+  color: #fff;
+}
+
+.bg-warning {
+  background-color: #ffb300;
+}
+
+.bg-warning,
+.bg-warning a {
+  color: #fff;
+}
+
+.bg-warning a:hover,
+.bg-warning a:focus {
+  color: #fff;
+}
+
+.bg-danger {
+  background-color: #f44336;
+}
+
+.bg-danger,
+.bg-danger a {
+  color: #fff;
+}
+
+.bg-danger a:hover,
+.bg-danger a:focus {
+  color: #fff;
+}
+
+.bg-mint {
+  background-color: #26a69a;
+}
+
+.bg-mint,
+.bg-mint a {
+  color: #fff;
+}
+
+.bg-mint a:hover,
+.bg-mint a:focus {
+  color: #fff;
+}
+
+.bg-purple {
+  background-color: #ab47bc;
+}
+
+.bg-purple,
+.bg-purple a {
+  color: #fff;
+}
+
+.bg-purple a:hover,
+.bg-purple a:focus {
+  color: #fff;
+}
+
+.bg-pink {
+  background-color: #f06292;
+}
+
+.bg-pink,
+.bg-pink a {
+  color: #fff;
+}
+
+.bg-pink a:hover,
+.bg-pink a:focus {
+  color: #fff;
+}
+
+.bg-eee {
+  background-color: #ddd;
+}
+
+.bg-eee,
+.bg-eee a {
+  color: #fff;
+}
+
+.bg-eee a:hover,
+.bg-eee a:focus {
+  color: #fff;
+}
+
+.bg-dark {
+  background-color: #3a444e;
+}
+
+.bg-dark,
+.bg-dark a {
+  color: #fff;
+}
+
+.bg-dark a:hover,
+.bg-dark a:focus {
+  color: #fff;
+}
+/*中部弹出逐渐放大缩小*/
+@keyframes centerShow {
+  0% {
+    transform: scale(0.2);
+    opacity: 0.5;
+  }
+  50% {
+    transform: scale(0.6);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+@-moz-keyframes centerShow {
+  0% {
+    transform: scale(0.2);
+    opacity: 0.5;
+  }
+  50% {
+    transform: scale(0.6);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+@-webkit-keyframes centerShow {
+  0% {
+    transform: scale(0.2);
+    opacity: 0.5;
+  }
+  50% {
+    transform: scale(0.6);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+@keyframes centerHidden {
+  0% {
+    transform: scale(0.6);
+    opacity: 0.6;
+  }
+  50% {
+    transform: scale(0.3);
+    opacity: 0.3;
+  }
+  100% {
+    transform: scale(0);
+    opacity: 0;
+  }
+}
+@-moz-keyframes centerHidden {
+  0% {
+    transform: scale(0.6);
+    opacity: 0.6;
+  }
+  50% {
+    transform: scale(0.3);
+    opacity: 0.3;
+  }
+  100% {
+    transform: scale(0);
+    opacity: 0;
+  }
+}
+@-webkit-keyframes centerHidden {
+  0% {
+    transform: scale(0.6);
+    opacity: 0.6;
+  }
+  50% {
+    transform: scale(0.3);
+    opacity: 0.3;
+  }
+  100% {
+    transform: scale(0);
+    opacity: 0;
+  }
+}
+.center-show-enter-active {
+  animation: centerShow 0.2s ease-in-out;
+}
+.center-show-leave-active {
+  animation: centerHidden 0.2s ease-in-out;
+}
+
+
