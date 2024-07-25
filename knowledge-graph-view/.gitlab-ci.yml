@@ -1,0 +1,114 @@
+image: docker:20.10.16
+
+workflow:
+  rules:
+    # - if: '$CI_COMMIT_BRANCH == "master"'
+    - if: '$CI_COMMIT_BRANCH =~ /^release-.*$/'
+    - if: '$CI_COMMIT_TAG'
+
+variables:
+  DOCKER_TLS_CERTDIR: '/certs'
+
+# maven 缓存，不必每次打包都从远程仓库下载 jar 包
+cache:
+  paths:
+    - node_modules/
+
+stages:
+  - build
+  - package
+  - deploy
+
+npm-test-build:
+  image: node:16.14.0-alpine3.15
+  stage: build
+  rules:
+    - if: '$CI_COMMIT_BRANCH =~ /^release-.*$/'
+  script:
+    - npm config set strict-ssl false
+    - npm --registry https://registry.npm.taobao.org install pnpm@8.15.7 -g
+    - pnpm --registry https://registry.npm.taobao.org install
+    - pnpm run build:test
+  artifacts:
+    paths:
+      - dist
+
+# npm-pre-build:
+#   image: node:16.14.0-alpine3.15
+#   stage: build
+#   rules:
+#     - if: $CI_COMMIT_BRANCH == "master"
+#   script:
+#     - npm config set strict-ssl false
+#     - npm --registry https://registry.npm.taobao.org install pnpm@8.15.7 -g
+#     - pnpm --registry https://registry.npm.taobao.org install
+#     - pnpm run build:pre
+#   artifacts:
+#     paths:
+#       - dist
+
+npm-prod-build:
+  image: node:16.14.0-alpine3.15
+  stage: build
+  rules:
+    - if: $CI_COMMIT_TAG
+  script:
+    - npm config set strict-ssl false
+    - npm --registry https://registry.npm.taobao.org install pnpm@8.15.7 -g
+    - pnpm --registry https://registry.npm.taobao.org install
+    - pnpm run build:pro
+  artifacts:
+    paths:
+      - dist
+
+build-test-docker-image:
+  rules:
+    - if: '$CI_COMMIT_BRANCH =~ /^release-.*$/'
+  stage: package
+  services:
+    - name: docker:dind
+      entrypoint: ['dockerd-entrypoint.sh', '--tls=false']
+  before_script:
+    - docker login harbor.mgdaas-int.com --username $HARBOR_USERNAME --password $HARBOR_PASSWORD
+  script:
+    - docker build  . -t harbor.mgdaas-int.com/knowledge-mapping/knowledge-mapping-web:yourNewVersion --build-arg ENV=qa
+    - docker push harbor.mgdaas-int.com/knowledge-mapping/knowledge-mapping-web:yourNewVersion
+
+# build-pre-docker-image:
+#   rules:
+#     - if: $CI_COMMIT_BRANCH == "master"
+#   stage: package
+#   services:
+#     - name: docker:dind
+#       entrypoint: ['dockerd-entrypoint.sh', '--tls=false']
+#   before_script:
+#     - docker login harbor.mgdaas-int.com --username $HARBOR_USERNAME --password $HARBOR_PASSWORD
+#   script:
+#     - docker build  . -t harbor.mgdaas-int.com/oa/oa-ui:pre --build-arg ENV=pre
+#     - docker push harbor.mgdaas-int.com/oa/oa-ui:pre
+
+build-prod-docker-image:
+  rules:
+    - if: $CI_COMMIT_TAG
+  stage: package
+  services:
+    - name: docker:dind
+      entrypoint: ['dockerd-entrypoint.sh', '--tls=false']
+  before_script:
+    - docker login harbor.mgdaas-int.com --username $HARBOR_USERNAME --password $HARBOR_PASSWORD
+  script:
+    - docker build  . -t harbor.mgdaas-int.com/knowledge-mapping/knowledge-mapping-web:$CI_COMMIT_TAG --build-arg ENV=prod
+    - docker push harbor.mgdaas-int.com/knowledge-mapping/knowledge-mapping-web:$CI_COMMIT_TAG
+
+k8s-deploy:
+  rules:
+    - if: '$CI_COMMIT_BRANCH =~ /^release-.*$/'
+  stage: deploy
+  image: curlimages/curl:latest
+  script:
+    - |
+      curl -X PUT \
+      -H "content-type: application/json" \
+      -H "Cookie: KuboardUsername=wangcd; KuboardAccessKey=wwr2zw5ns7n8.7iwrx4ntp66e68t4r7hp2ecbj5sewybz" \
+      -d '{"kind":"deployments","namespace":"oa-qa","name":"knowledge-mapping-ui","images":{"harbor.mgdaas-int.com/knowledge-mapping/knowledge-mapping-web":"harbor.mgdaas-int.com/knowledge-mapping/knowledge-mapping-web:yourNewVersion"}}' \
+      "http://kuboard.mgdaas-int.com/kuboard-api/cluster/default/kind/CICDApi/wangcd/resource/updateImageTag"
